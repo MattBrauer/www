@@ -6,7 +6,10 @@ const NEIGHBORHOODS = [
     vibe: "either",
     tagline: "Beat generation roots, Italian soul",
     history: "San Francisco's Italian immigrant heart since the Gold Rush era. In the 1950s, City Lights Bookstore and Vesuvio Bar made it the nucleus of the Beat movement — Ginsberg, Kerouac, and Ferlinghetti all passed through. The neighborhood retains its village-within-a-city energy.",
-    intro: "North Beach is my favorite entry point into SF's layered identity. On the surface it reads as a classic tourist neighborhood — Columbus Avenue, Coit Tower, espresso bars. But spend an afternoon wandering Waverly Place or climbing Telegraph Hill and it reveals something quieter and stranger. The wild parrots nesting on the hill are not a metaphor, but they might as well be. This is a neighborhood that kept its soul through decades of change, and I want you to feel that.",
+    intro: "",
+    /*
+    "North Beach is my favorite entry point into SF's layered identity. On the surface it reads as a classic tourist neighborhood — Columbus Avenue, Coit Tower, espresso bars. But spend an afternoon wandering Waverly Place or climbing Telegraph Hill and it reveals something quieter and stranger. The wild parrots nesting on the hill are not a metaphor, but they might as well be. This is a neighborhood that kept its soul through decades of change, and I want you to feel that.",
+    */
     itinerary: [
       { time: "10:00 am", stop: "Start at Caffe Trieste", note: "The oldest espresso bar on the West Coast. Sit at a table, order a cappuccino, watch the neighborhood wake up." },
       { time: "10:45 am", stop: "City Lights Bookstore", note: "Browse the basement poetry room. Pick up something by Ferlinghetti or Ginsberg — it'll mean more after you've stood here." },
@@ -32,7 +35,10 @@ const NEIGHBORHOODS = [
     vibe: "daytime",
     tagline: "Oldest Chinatown in North America, dense and alive",
     history: "Established in 1848, this is the oldest Chinatown in North America and was the entry point for generations of Chinese immigrants. It survived the 1906 earthquake and subsequent attempts at forced relocation. Today it's one of the most densely populated urban districts in the US.",
+    intro: "",
+    /*
     intro: "Most people walk down Grant Avenue, buy a snow globe, and think they've seen Chinatown. I want to take you to Stockton Street instead — the street that actually feeds the neighborhood, packed with produce vendors, dried seafood shops, and people doing their weekly shopping. Chinatown rewards the person who slows down and pays attention to the details: the paper offerings hung outside doorways, the sound of Cantonese through a half-open window, the fortune cookie factory tucked into a narrow alley. There's 175 years of survival and adaptation packed into six blocks.",
+    */
     itinerary: [
       { time: "10:00 am", stop: "Enter through the Dragon Gate on Bush St", note: "The formal entrance. Stop and look at it properly — then walk through and notice how immediately the city changes." },
       { time: "10:15 am", stop: "Walk Waverly Place", note: "The 'Street of Painted Balconies.' Three tong association buildings and a temple. Look up." },
@@ -58,7 +64,10 @@ const NEIGHBORHOODS = [
     vibe: "either",
     tagline: "Heart of LGBTQ+ America, enduring and proud",
     history: "Transformed in the late 1960s–70s as LGBTQ+ residents built one of the first openly gay neighborhoods in the world. Harvey Milk was elected from here in 1977. The AIDS crisis hit the Castro devastatingly; its legacy of activism and community care shaped modern LGBTQ+ rights movements globally.",
-    intro: "The Castro is one of the most historically significant neighborhoods in America and I want you to feel that weight alongside the joy. Harvey Milk's camera shop was on Castro Street. The Names Project AIDS Memorial Quilt was organized here. And on any given weekend evening, it's also one of the most alive, warm, and celebratory places in the city. The GLBT History Museum is small but worth an hour — it'll give you context that makes the rest of the neighborhood hit differently. Then walk up to Twin Peaks for the view.",
+    intro: "",
+    /*
+        intro: "The Castro is one of the most historically significant neighborhoods in America and I want you to feel that weight alongside the joy. Harvey Milk's camera shop was on Castro Street. The Names Project AIDS Memorial Quilt was organized here. And on any given weekend evening, it's also one of the most alive, warm, and celebratory places in the city. The GLBT History Museum is small but worth an hour — it'll give you context that makes the rest of the neighborhood hit differently. Then walk up to Twin Peaks for the view.",
+    */
     itinerary: [
       { time: "11:00 am", stop: "Harvey Milk Plaza and the Rainbow Flag", note: "Start here. Read the plaque. The flag is enormous and intentional." },
       { time: "11:30 am", stop: "GLBT Historical Society Museum", note: "Small but essential. An hour here reframes everything else." },
@@ -84,7 +93,10 @@ const NEIGHBORHOODS = [
     vibe: "either",
     tagline: "Latino culture, murals, and the city's best food block",
     history: "Named for Mission Dolores (1776), SF's oldest building. The Mission became a working-class Latino neighborhood through 20th-century immigration and remains culturally anchored there. The mural tradition — particularly on Balmy Alley — is world-class street art of genuine political weight.",
-    intro: "The Mission is where I take people when I want them to understand what SF actually is underneath the tech veneer. It's been fighting gentrification for 25 years and the results are complicated and visible on every block — a taqueria next to a $17 cocktail bar next to a community mural that's been there since 1984. Dolores Park on a sunny Saturday is one of the great urban experiences in America. Balmy Alley will make you stop at every gate. And the food on 24th Street is legitimate — not curated, not trendy, just people who've been feeding the neighborhood for decades.",
+    intro: "",
+    /*
+        intro: "The Mission is where I take people when I want them to understand what SF actually is underneath the tech veneer. It's been fighting gentrification for 25 years and the results are complicated and visible on every block — a taqueria next to a $17 cocktail bar next to a community mural that's been there since 1984. Dolores Park on a sunny Saturday is one of the great urban experiences in America. Balmy Alley will make you stop at every gate. And the food on 24th Street is legitimate — not curated, not trendy, just people who've been feeding the neighborhood for decades.",
+    */
     itinerary: [
       { time: "10:00 am", stop: "Mission Dolores", note: "The original 1776 mission. The cemetery in the back is quiet and strange. Allow 45 minutes." },
       { time: "11:00 am", stop: "Dolores Park", note: "Sit on the hill facing the city. Observe the social geography of the park — it's its own thing." },
@@ -110,7 +122,10 @@ const NEIGHBORHOODS = [
     vibe: "daytime",
     tagline: "Summer of Love ground zero, still counterculture",
     history: "The epicenter of the 1967 Summer of Love. Janis Joplin, the Grateful Dead, and Jefferson Airplane all lived within blocks of here. The Victorian housing stock survived the 1906 earthquake, giving the neighborhood its characteristic painted-lady streetscape.",
-    intro: "Haight-Ashbury exists in a strange relationship with its own mythology. The summer of 1967 was real, consequential, and also over in about six months. What's left is a neighborhood that has absorbed that history and done something idiosyncratic with it — part nostalgia trip, part actual counterculture, part vintage shopping destination. I find it most interesting as a place to walk and look at the architecture: the Victorians here are some of the best-preserved in the city, and the Grateful Dead house at 710 Ashbury is just... a house on a street, which is somehow more resonant than a monument would be.",
+    intro: "",
+    /*
+        intro: "Haight-Ashbury exists in a strange relationship with its own mythology. The summer of 1967 was real, consequential, and also over in about six months. What's left is a neighborhood that has absorbed that history and done something idiosyncratic with it — part nostalgia trip, part actual counterculture, part vintage shopping destination. I find it most interesting as a place to walk and look at the architecture: the Victorians here are some of the best-preserved in the city, and the Grateful Dead house at 710 Ashbury is just... a house on a street, which is somehow more resonant than a monument would be.",
+    */
     itinerary: [
       { time: "10:00 am", stop: "Coffee at Flywheel Coffee", note: "Good neighborhood café, not a chain. Wake up before the Haight demands your attention." },
       { time: "10:30 am", stop: "710 Ashbury Street", note: "The Grateful Dead house. Just stand outside and look at it. Note that it's an ordinary Victorian on an ordinary block." },
@@ -136,7 +151,10 @@ const NEIGHBORHOODS = [
     vibe: "daytime",
     tagline: "Urban wilderness bigger than Central Park",
     history: "Developed from sand dunes starting in 1870, largely through the vision of superintendent John McLaren who shaped it over 55 years. At 1,017 acres it's significantly larger than Central Park and functions as the lungs of the west side. It hosted the 1894 Midwinter International Exposition.",
-    intro: "Golden Gate Park is one of the great achievements of 19th-century landscape design and most people don't give it the time it deserves. The eastern end is busy and curated — museums, gardens, the bison paddock. The western half gets progressively wilder and emptier until you're walking through windswept dunes above Ocean Beach and it feels nothing like a city at all. I'd suggest the museums on a first visit but on subsequent visits, go west. The Japanese Tea Garden and the de Young are the anchors but the park rewards aimless wandering more than anything.",
+    intro: "",
+    /*
+        intro: "Golden Gate Park is one of the great achievements of 19th-century landscape design and most people don't give it the time it deserves. The eastern end is busy and curated — museums, gardens, the bison paddock. The western half gets progressively wilder and emptier until you're walking through windswept dunes above Ocean Beach and it feels nothing like a city at all. I'd suggest the museums on a first visit but on subsequent visits, go west. The Japanese Tea Garden and the de Young are the anchors but the park rewards aimless wandering more than anything.",
+    */
     itinerary: [
       { time: "10:00 am", stop: "Japanese Tea Garden", note: "Opens at 9am. Go early before the crowds. Sit at the tea house. The moon bridge is the photograph you'll take." },
       { time: "11:30 am", stop: "de Young Museum", note: "The permanent collection is underrated. The rooftop observation tower has the best interior view of the park." },
@@ -162,7 +180,10 @@ const NEIGHBORHOODS = [
     vibe: "daytime",
     tagline: "One of three surviving Japantowns in the US",
     history: "Japanese immigrants settled here in the early 1900s. The community was devastated when residents were forcibly relocated to internment camps in 1942. Post-war redevelopment further displaced the Black community of the Western Addition. What remains is resilient and intentional.",
-    intro: "Japantown carries a complicated history — dispossession, forced removal, redevelopment — and yet it persists as a genuine living neighborhood rather than a theme park. The Japan Center mall is a bit dated in the best possible way. The Fillmore, a block away, was the center of SF's Black music scene — the 'Harlem of the West' — before urban renewal cleared it. Walking between these two histories on the same afternoon is a useful thing to do in a city that tends toward ahistorical cheerfulness.",
+    intro: "",
+    /*
+        intro: "Japantown carries a complicated history — dispossession, forced removal, redevelopment — and yet it persists as a genuine living neighborhood rather than a theme park. The Japan Center mall is a bit dated in the best possible way. The Fillmore, a block away, was the center of SF's Black music scene — the 'Harlem of the West' — before urban renewal cleared it. Walking between these two histories on the same afternoon is a useful thing to do in a city that tends toward ahistorical cheerfulness.",
+    */
     itinerary: [
       { time: "10:30 am", stop: "Peace Plaza and the Peace Pagoda", note: "The five-tiered pagoda was a gift from Japan in 1968. Sit in the plaza and orient yourself." },
       { time: "11:00 am", stop: "Japan Center indoor mall", note: "Not ironic — genuinely good. Kinokuniya Books, Daiso, small restaurants. Spend an hour." },
@@ -188,7 +209,10 @@ const NEIGHBORHOODS = [
     vibe: "either",
     tagline: "Painted Ladies, Victorian blocks, and neighborhood restaurants",
     history: "Alamo Square's row of Victorian houses against the skyline is one of SF's most photographed images. The surrounding NoPa (North of the Panhandle) developed in the post-earthquake rebuild of the early 1900s and has become one of the more livable and food-rich areas of the city.",
-    intro: "NoPa is the neighborhood I'd live in if I lived in the central city. Divisadero Street has quietly become one of the best restaurant and bar streets in SF — not the most famous, not the most Instagrammed, just consistently excellent. Alamo Square Park is the place to see the Painted Ladies properly, but linger — the park itself has a great view of the downtown skyline and is worth sitting in. The neighborhood feels genuinely residential in a way that some of SF's more famous neighborhoods don't.",
+    intro: "",
+    /*
+        intro: "NoPa is the neighborhood I'd live in if I lived in the central city. Divisadero Street has quietly become one of the best restaurant and bar streets in SF — not the most famous, not the most Instagrammed, just consistently excellent. Alamo Square Park is the place to see the Painted Ladies properly, but linger — the park itself has a great view of the downtown skyline and is worth sitting in. The neighborhood feels genuinely residential in a way that some of SF's more famous neighborhoods don't.",
+    */
     itinerary: [
       { time: "9:30 am", stop: "Breakfast at Nopa", note: "They do weekend brunch. The ricotta pancakes. Go early, it fills up." },
       { time: "11:00 am", stop: "Alamo Square Park", note: "The Painted Ladies view is from the top of the park, not the bottom. Sit on the bench at the crest." },
@@ -214,7 +238,10 @@ const NEIGHBORHOODS = [
     vibe: "either",
     tagline: "The city's waterfront spine, farmers market, and bay views",
     history: "SF's original industrial waterfront, lined with working piers through the early 20th century. The elevated Embarcadero Freeway was torn down after the 1989 earthquake, opening up the waterfront and catalyzing what's now a premier civic promenade. The Ferry Building dates to 1898.",
-    intro: "The Saturday farmers market at the Ferry Building is one of my favorite things in San Francisco. The building itself is beautiful — restored properly after decades of neglect — and the market wraps around the exterior along the waterfront. Farmers, ranchers, bakers, cheese makers, all in conversation with each other and their customers. Come hungry and plan to graze. Then walk the Embarcadero north toward the piers — it's a long, meditative waterfront walk with the Bay on one side and the city's edge on the other.",
+    intro: "",
+    /*
+        intro: "The Saturday farmers market at the Ferry Building is one of my favorite things in San Francisco. The building itself is beautiful — restored properly after decades of neglect — and the market wraps around the exterior along the waterfront. Farmers, ranchers, bakers, cheese makers, all in conversation with each other and their customers. Come hungry and plan to graze. Then walk the Embarcadero north toward the piers — it's a long, meditative waterfront walk with the Bay on one side and the city's edge on the other.",
+    */
     itinerary: [
       { time: "9:00 am", stop: "Ferry Building Farmers Market (Saturday only)", note: "Come hungry. Blue Bottle Coffee is inside. The Acme bread, Cowgirl Creamery, Dirty Girl Produce — work the whole market." },
       { time: "10:30 am", stop: "Ferry Building interior", note: "The permanent vendors: Cowgirl Creamery, Humphry Slocombe, The Slanted Door. The building itself is worth looking at." },
@@ -240,7 +267,10 @@ const NEIGHBORHOODS = [
     vibe: "evening",
     tagline: "Museums, nightlife, and the city's industrial arts district",
     history: "South of Market was SF's working-class and industrial district through most of the 20th century. The 1990s dot-com boom transformed it with offices and nightclubs. It remains a center of SF nightlife and houses the SFMOMA, Yerba Buena Center for the Arts, and several major museums.",
-    intro: "SoMa is less a neighborhood in the traditional sense than an accumulation of zones — the museum district around Yerba Buena, the nightlife corridor on Folsom, the design district, the tech offices. SFMOMA is genuinely world-class and perpetually undervisited by locals. Yerba Buena Gardens is a surprising oasis in the middle of it. For evenings, the area around 11th and Folsom has a density of bars and venues that's unmatched in SF. It's not a place I'd send you to wander aimlessly during the day, but with a destination it rewards the visit.",
+    intro: "",
+    /*
+        intro: "SoMa is less a neighborhood in the traditional sense than an accumulation of zones — the museum district around Yerba Buena, the nightlife corridor on Folsom, the design district, the tech offices. SFMOMA is genuinely world-class and perpetually undervisited by locals. Yerba Buena Gardens is a surprising oasis in the middle of it. For evenings, the area around 11th and Folsom has a density of bars and venues that's unmatched in SF. It's not a place I'd send you to wander aimlessly during the day, but with a destination it rewards the visit.",
+    */
     itinerary: [
       { time: "11:00 am", stop: "SFMOMA", note: "Plan 2–3 hours. The permanent collection's third floor (photography and works on paper) is exceptional. The building itself is worth studying." },
       { time: "2:00 pm", stop: "Yerba Buena Gardens", note: "The rooftop gardens above the Moscone Center. Surprisingly peaceful. The Martin Luther King waterfall memorial is powerful." },
@@ -266,7 +296,10 @@ const NEIGHBORHOODS = [
     vibe: "daytime",
     tagline: "Sunny, strollable, and deeply residential",
     history: "Named after Jose de Jesus Noe, the last Mexican alcalde of San Francisco before California statehood. It was farmland into the late 1800s before being subdivided into Victorian and Edwardian blocks. A microclimate makes it one of SF's sunniest spots, reinforcing its community-oriented character.",
-    intro: "Noe Valley is the neighborhood that makes you understand why people who can afford to leave San Francisco don't. It has a microclimate that keeps it sunny when the rest of the city is fogged in. 24th Street is a proper main street — a farmers market on Saturdays, independent bookshops, cafes where people actually know each other. It's comfortable in a way that other SF neighborhoods strain to achieve, and the residential streets climbing the hills in each direction are some of the most beautiful in the city.",
+    intro: "",
+    /*
+        intro: "Noe Valley is the neighborhood that makes you understand why people who can afford to leave San Francisco don't. It has a microclimate that keeps it sunny when the rest of the city is fogged in. 24th Street is a proper main street — a farmers market on Saturdays, independent bookshops, cafes where people actually know each other. It's comfortable in a way that other SF neighborhoods strain to achieve, and the residential streets climbing the hills in each direction are some of the most beautiful in the city.",
+    */
     itinerary: [
       { time: "10:00 am", stop: "Saturday Farmers Market on 24th Street (Saturday only)", note: "Smaller than the Ferry Building market but genuinely neighborhood-scale. This is where Noe Valley feeds itself." },
       { time: "10:30 am", stop: "Martha & Bros Coffee", note: "The neighborhood coffee institution. Get a table outside." },
@@ -292,7 +325,10 @@ const NEIGHBORHOODS = [
     vibe: "daytime",
     tagline: "The hill with the 360° view and the village feel",
     history: "An independent town until annexed by SF in 1870. Bernal Heights avoided heavy development due to its steep terrain, which paradoxically preserved its village character. The hilltop park offers panoramic sightlines from the bay to the ocean.",
-    intro: "Bernal Heights is the neighborhood that rewards going slightly off-script. The hilltop park is remarkable — a genuine open hillside in the middle of the city, with coyotes and hawks and a view that takes in everything from the Bay Bridge to the ocean. Cortland Avenue is a proper neighborhood main street, not polished for visitors. And the Hillary Steps at the summit offer the best spontaneous bouldering in SF. It's the neighborhood that most feels like it belongs to the people who live in it.",
+    intro: "",
+    /*
+        intro: "Bernal Heights is the neighborhood that rewards going slightly off-script. The hilltop park is remarkable — a genuine open hillside in the middle of the city, with coyotes and hawks and a view that takes in everything from the Bay Bridge to the ocean. Cortland Avenue is a proper neighborhood main street, not polished for visitors. And the Hillary Steps at the summit offer the best spontaneous bouldering in SF. It's the neighborhood that most feels like it belongs to the people who live in it.",
+    */
     itinerary: [
       { time: "10:00 am", stop: "Coffee on Cortland Avenue", note: "Pinhole Coffee or Good Weather. Sit outside and watch the neighborhood." },
       { time: "10:45 am", stop: "Precita Eyes Mural Arts", note: "The center for SF's mural tradition. They run walking tours of the Mission murals from here." },
@@ -318,7 +354,10 @@ const NEIGHBORHOODS = [
     vibe: "daytime",
     tagline: "Fog, dim sum, Russian history, and the park's north edge",
     history: "The Richmond developed alongside Golden Gate Park as the city pushed west through the dunes. It became home to Russian immigrants fleeing the Revolution, then waves of Chinese and Southeast Asian immigrants — layers still visible in the food scene and the Russian Orthodox Cathedral.",
-    intro: "The Richmond is where SF locals eat. Clement Street is a working food street without tourist markup — dim sum restaurants, Vietnamese pho houses, a Russian deli, a Japanese grocery, a Irish pub that predates the neighborhood's character. Green Apple Books is one of the great independent bookstores in America. And the Lands End trail at the neighborhood's northwestern edge is one of the most dramatic coastal walks in the Bay Area — ruined baths, shipwrecks visible at low tide, and the Golden Gate framed between headlands.",
+    intro: "",
+    /*
+        intro: "The Richmond is where SF locals eat. Clement Street is a working food street without tourist markup — dim sum restaurants, Vietnamese pho houses, a Russian deli, a Japanese grocery, a Irish pub that predates the neighborhood's character. Green Apple Books is one of the great independent bookstores in America. And the Lands End trail at the neighborhood's northwestern edge is one of the most dramatic coastal walks in the Bay Area — ruined baths, shipwrecks visible at low tide, and the Golden Gate framed between headlands.",
+    */
     itinerary: [
       { time: "10:00 am", stop: "Dim sum on Clement Street", note: "Hong Kong Lounge or Koi Palace. Go early, go hungry, go with an appetite for variety." },
       { time: "11:30 am", stop: "Green Apple Books", note: "Both locations are within a block of each other. The used fiction room in the back of the main store." },
@@ -344,7 +383,10 @@ const NEIGHBORHOODS = [
     vibe: "daytime",
     tagline: "Military history, bay views, and one of SF's best walks",
     history: "A military installation for 219 years under three flags — Spanish, Mexican, and American — before being transferred to the National Park Service in 1994. Crissy Field was a military airstrip restored to a tidal marsh in 2001. The transition from army base to park is one of urban America's great civic success stories.",
-    intro: "The Presidio is the best argument for the National Park Service. What was a military base for 219 years is now a forest, a marsh, a beach, a trail network, and a collection of repurposed military architecture — all tucked into the northwestern corner of the city with the Golden Gate as a backdrop. The Crissy Field walk is the finest urban waterfront walk I know: you start at the marina, walk through a restored tidal marsh, and end at the base of the Golden Gate Bridge. Do it in the late afternoon when the light comes off the water.",
+    intro: "",
+    /*
+        intro: "The Presidio is the best argument for the National Park Service. What was a military base for 219 years is now a forest, a marsh, a beach, a trail network, and a collection of repurposed military architecture — all tucked into the northwestern corner of the city with the Golden Gate as a backdrop. The Crissy Field walk is the finest urban waterfront walk I know: you start at the marina, walk through a restored tidal marsh, and end at the base of the Golden Gate Bridge. Do it in the late afternoon when the light comes off the water.",
+    */
     itinerary: [
       { time: "9:30 am", stop: "Start at Crissy Field Center", note: "Get oriented. The marsh restoration is visible from the path — look for the egrets and plovers." },
       { time: "10:00 am", stop: "Walk Crissy Field to Fort Point", note: "The full waterfront walk. Fort Point is directly under the bridge. Stand inside and look up at the underside of the span." },
@@ -370,7 +412,10 @@ const NEIGHBORHOODS = [
     vibe: "either",
     tagline: "Brunch culture, the bay, and Italianate architecture",
     history: "The Marina was built on fill for the 1915 Panama-Pacific Exposition — the same landfill that liquefied in the 1989 earthquake. Marina homes are recognizable by their Italianate and Mediterranean Revival architecture. Cow Hollow behind it was literally a dairy farming area through the 1890s.",
-    intro: "The Marina has a reputation among SF locals as the neighborhood for tech bros and overpriced brunch, and that reputation is not entirely unearned. But it also contains some of the most beautiful architecture in SF, a waterfront green that's one of the best places to watch the bay, and access to the Presidio that makes it an excellent base for a day of exploring. Chestnut Street has good food and a density of people-watching. The Wave Organ at the breakwater is a strange and quietly wonderful acoustic sculpture. And the Palace of Fine Arts is one of the most romantic structures in the city.",
+    intro: "",
+    /*
+        intro: "The Marina has a reputation among SF locals as the neighborhood for tech bros and overpriced brunch, and that reputation is not entirely unearned. But it also contains some of the most beautiful architecture in SF, a waterfront green that's one of the best places to watch the bay, and access to the Presidio that makes it an excellent base for a day of exploring. Chestnut Street has good food and a density of people-watching. The Wave Organ at the breakwater is a strange and quietly wonderful acoustic sculpture. And the Palace of Fine Arts is one of the most romantic structures in the city.",
+    */
     itinerary: [
       { time: "10:00 am", stop: "Breakfast on Chestnut Street", note: "Mel's, Roam Artisan Burgers, or any of the cafes. The street is at its best in the morning." },
       { time: "11:00 am", stop: "Palace of Fine Arts", note: "Walk around the rotunda. The reflections in the lagoon. Bring a book if you want to linger." },
@@ -396,7 +441,10 @@ const NEIGHBORHOODS = [
     vibe: "daytime",
     tagline: "Fog, surf culture, and the city's most underrated restaurant strip",
     history: "Developed in the early 20th century as the city pushed west through the dunes. Long considered a sleepy residential backwater, the Outer Sunset has become a destination in its own right, with a thriving independent restaurant and café scene along Irving and Judah, and a surf culture centered on Ocean Beach.",
-    intro: "The Outer Sunset is the SF neighborhood that most surprises people who think they know the city. It's the end of the continent — literally, the last blocks before the Pacific — and it has a quality of light and a pace that feels nothing like downtown. The fog rolls in most afternoons and the wind off the ocean is real. But the restaurant strip along Irving Street has quietly become one of the best in the city, and on a sunny morning (they happen, usually before noon), Ocean Beach is extraordinary. Bring a jacket regardless.",
+    intro: "",
+    /*
+        intro: "The Outer Sunset is the SF neighborhood that most surprises people who think they know the city. It's the end of the continent — literally, the last blocks before the Pacific — and it has a quality of light and a pace that feels nothing like downtown. The fog rolls in most afternoons and the wind off the ocean is real. But the restaurant strip along Irving Street has quietly become one of the best in the city, and on a sunny morning (they happen, usually before noon), Ocean Beach is extraordinary. Bring a jacket regardless.",
+    */
     itinerary: [
       { time: "9:30 am", stop: "Morning walk on Ocean Beach", note: "Go early before the fog burns off — or embrace the fog. The beach at 7am with surfers in the water is a defining SF image." },
       { time: "10:30 am", stop: "Sutro Baths", note: "Walk up from the beach. The ruins of the 1894 public bathhouse are dramatic at any time. The cave at the back." },
