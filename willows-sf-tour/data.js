@@ -19,6 +19,7 @@ const NEIGHBORHOODS = [
       { time: "2:30 pm", stop: "Washington Square Park", note: "Sit for a while. Watch the bocce players, the tai chi practitioners, the dog walkers. This is neighborhood life." }
     ],
     spots: [
+      { name: "The Saloon", type: "Club", note: "The oldest bar in San Francisco (c. 1861) and a tiny blues club. I used to see Roy Rogers, Elvin Bishop, Marcia Ball, other luminaries here in the late 80s." },
       { name: "Caffe Trieste", type: "Coffee", note: "Oldest espresso bar on the West Coast. Cash only, no laptop crowd." },
       { name: "City Lights Books", type: "Books", note: "The Beat generation's spiritual home. The basement poetry room is essential." },
       { name: "Vesuvio Bar", type: "Bar", note: "Order the Kerouac. Look at everything on the walls." },
