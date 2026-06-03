@@ -6,7 +6,7 @@ const NEIGHBORHOODS = [
     vibe: "either",
     tagline: "Beat generation roots, Italian soul",
     history: "San Francisco's Italian immigrant heart since the Gold Rush era. In the 1950s, City Lights Bookstore and Vesuvio Bar made it the nucleus of the Beat movement — Ginsberg, Kerouac, and Ferlinghetti all passed through. The neighborhood retains its village-within-a-city energy.",
-    intro: "",
+    intro: "North Beach is one of my (and to be fair, many others') favorite fun neighborhoods in the City. Its historical, culinary and musical significance are pretty much unmatched by any other neighborhood. The urban hiking opportunities are fantastic, and it's fun to walk around in the day or the evening. The oldest bar in the City (The Saloon) is a tiny blues venue that holds a lot of memories for me. There are probably half a dozen cafes, bars and restaurants that have similar personal significance. (Though I have not spent any time in the strip clubs on Broadway, I appreciate the fact that my step-mom funded the purchase of her first house and her graduate literature degree by working in one of them).",
     /*
     "North Beach is my favorite entry point into SF's layered identity. On the surface it reads as a classic tourist neighborhood — Columbus Avenue, Coit Tower, espresso bars. But spend an afternoon wandering Waverly Place or climbing Telegraph Hill and it reveals something quieter and stranger. The wild parrots nesting on the hill are not a metaphor, but they might as well be. This is a neighborhood that kept its soul through decades of change, and I want you to feel that.",
     */
