@@ -4,155 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Willow's Tour of San Francisco</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --ink: #1a1714;
-    --ink-2: #4a4540;
-    --ink-3: #8a8580;
-    --paper: #f7f4ef;
-    --paper-2: #ede9e2;
-    --paper-3: #e2ddd5;
-    --accent: #c84b2f;
-    --accent-2: #e8b86d;
-    --accent-3: #4a7c6f;
-    --serif: 'Playfair Display', Georgia, serif;
-    --sans: 'DM Sans', system-ui, sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 5rem 2rem 4rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200,75,47,0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(74,124,111,0.15) 0%, transparent 55%);
-    pointer-events: none;
-  }
-  .hero-eyebrow {
-    font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--accent-2);
-    margin-bottom: 1.2rem;
-  }
-  .hero h1 {
-    font-family: var(--serif);
-    font-size: clamp(2.6rem, 6vw, 4.5rem);
-    font-weight: 400;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    margin-bottom: 1.2rem;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent-2);
-  }
-  .hero-sub {
-    font-size: 15px;
-    color: rgba(247,244,239,0.6);
-    max-width: 420px;
-    margin: 0 auto 2.5rem;
-    font-weight: 300;
-  }
-  .hero-rule {
-    width: 48px;
-    height: 1px;
-    background: var(--accent);
-    margin: 0 auto 2rem;
-  }
-  .hero-stats {
-    display: flex;
-    gap: 2.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .stat { text-align: center; }
-  .stat-n {
-    font-family: var(--serif);
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--paper);
-    display: block;
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(247,244,239,0.45);
-    margin-top: 4px;
-  }
-
-  /* ── CONTROLS ── */
   .controls {
     position: sticky;
     top: 0;
     z-index: 100;
     background: var(--paper-2);
     border-bottom: 1px solid var(--paper-3);
-    padding: 0.85rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     display: flex;
     gap: 0.6rem;
     flex-wrap: wrap;
     align-items: center;
   }
-  .filter-group {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .filter-sep {
-    width: 1px;
-    height: 20px;
-    background: var(--paper-3);
-    margin: 0 4px;
-  }
-  .filter-lbl {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin-right: 3px;
-  }
+  .filter-group { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
+  .filter-sep { width: 1px; height: 20px; background: var(--paper-3); margin: 0 4px; }
+  .filter-lbl { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-right: 3px; }
   .pill {
+    font-size: 12px; padding: 4px 12px; border-radius: 20px;
+    border: 1px solid var(--paper-3); background: transparent;
+    color: var(--ink-2); cursor: pointer; transition: all 0.15s; white-space: nowrap;
     font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 400;
-    padding: 4px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--paper-3);
-    background: transparent;
-    color: var(--ink-2);
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
   }
   .pill:hover { border-color: var(--ink-3); color: var(--ink); }
   .pill.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
@@ -160,181 +33,91 @@
   .pill.active.vibe-eve { background: var(--accent); border-color: var(--accent); }
   .pill.active.vibe-either { background: #6b5a3e; border-color: #6b5a3e; }
 
-  /* ── COUNT BAR ── */
-  .count-bar {
-    padding: 1.2rem 1.5rem 0.5rem;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-  }
+  .count-bar { padding: 1rem 1.5rem 0.4rem; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
 
-  /* ── GRID ── */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1px;
     background: var(--paper-3);
     border-top: 1px solid var(--paper-3);
-    padding-bottom: 4rem;
   }
 
-  /* ── CARD ── */
   .card {
     background: var(--paper);
     padding: 1.5rem;
-    cursor: pointer;
-    transition: background 0.15s;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    transition: background 0.15s;
   }
   .card:hover { background: #faf7f2; }
-  .card.expanded { background: #faf7f2; }
 
-  .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .card-num {
-    font-family: var(--serif);
-    font-size: 11px;
-    color: var(--ink-3);
-    margin-bottom: 6px;
-    font-style: italic;
-  }
-  .card-name {
-    font-family: var(--serif);
-    font-size: 1.2rem;
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--ink);
-  }
-  .card-tagline {
-    font-size: 12px;
-    color: var(--ink-3);
-    margin-top: 5px;
-    font-weight: 300;
-    font-style: italic;
-  }
-  .card-badges {
-    display: flex;
-    gap: 5px;
+  .card-num { font-family: var(--serif); font-size: 11px; color: var(--ink-3); margin-bottom: 5px; font-style: italic; }
+  .card-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; line-height: 1.2; color: var(--ink); }
+  .card-tagline { font-size: 12px; color: var(--ink-3); margin-top: 4px; font-weight: 300; font-style: italic; }
+  .card-badges { display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap; }
+
+  .card-note {
     margin-top: 12px;
-    flex-wrap: wrap;
-  }
-  .badge {
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 3px;
-  }
-  .badge-zone {
-    background: var(--paper-2);
+    padding-top: 12px;
+    border-top: 1px solid var(--paper-3);
+    font-size: 13px;
     color: var(--ink-2);
-    border: 1px solid var(--paper-3);
+    line-height: 1.6;
+    font-weight: 300;
+    flex: 1;
   }
-  .badge-day { background: #deeee9; color: #2a5448; }
-  .badge-evening { background: #f5e0da; color: #7a2b18; }
-  .badge-either { background: #ede5d8; color: #5a4728; }
 
-  .toggle-icon {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: 1px solid var(--paper-3);
+  .card-footer {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--paper-3);
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 13px;
-    color: var(--ink-3);
-    transition: transform 0.2s, background 0.15s;
-    margin-top: 2px;
+    justify-content: space-between;
+    gap: 8px;
   }
-  .card.expanded .toggle-icon { transform: rotate(45deg); background: var(--ink); color: var(--paper); border-color: var(--ink); }
-
-  /* ── EXPANDED BODY ── */
-  .card-body {
-    display: none;
-    margin-top: 1.25rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--paper-3);
-    animation: fadeIn 0.2s ease;
-  }
-  .card.expanded .card-body { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-
-  .body-section { margin-bottom: 1.1rem; }
-  .body-section:last-child { margin-bottom: 0; }
-  .section-lbl {
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+  .card-pairs { font-size: 11px; color: var(--ink-4); font-style: italic; }
+  .card-link {
+    font-size: 12px;
     color: var(--accent);
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
-  .body-text {
-    font-size: 13px;
-    color: var(--ink-2);
-    line-height: 1.65;
-    font-weight: 300;
-  }
-  .attr-list {
-    list-style: none;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 4px;
+    transition: color 0.15s;
   }
-  .attr-list li {
-    font-size: 13px;
-    color: var(--ink-2);
-    padding-left: 14px;
-    position: relative;
-    line-height: 1.5;
-    font-weight: 300;
-  }
-  .attr-list li::before {
-    content: '–';
-    position: absolute;
-    left: 0;
-    color: var(--accent-2);
-  }
-  .pair-text {
-    font-size: 12px;
-    color: var(--ink-3);
-    font-style: italic;
-  }
+  .card-link:hover { color: var(--ink); }
 
-  /* ── FOOTER ── */
-  .footer {
-    background: var(--ink);
-    color: rgba(247,244,239,0.4);
-    text-align: center;
-    padding: 2rem;
-    font-size: 12px;
-    letter-spacing: 0.05em;
+  .personal-note-wrap {
+    margin-top: 10px;
+    background: var(--accent-2-light);
+    border-left: 2px solid var(--accent-2);
+    padding: 8px 12px;
+    border-radius: 0 3px 3px 0;
   }
-  .footer strong { color: rgba(247,244,239,0.7); font-weight: 400; }
+  .personal-note-label { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #a07830; margin-bottom: 3px; }
+  .personal-note-text { font-size: 12px; color: var(--ink-2); font-style: italic; line-height: 1.55; }
 
-  /* ── MOBILE ── */
   @media (max-width: 600px) {
-    .hero { padding: 3.5rem 1.5rem 3rem; }
-    .controls { padding: 0.75rem 1rem; }
+    .controls { padding: 0.7rem 1rem; }
+    .filter-sep { display: none; }
     .grid { grid-template-columns: 1fr; }
     .card { padding: 1.25rem; }
-    .filter-sep { display: none; }
   }
 </style>
 </head>
 <body>
 
+<nav class="site-nav">
+  <span class="nav-home">Willow's SF Tour</span>
+  <span style="font-size:11px; color: rgba(247,244,239,0.3); letter-spacing:0.06em; text-transform:uppercase;">16 neighborhoods</span>
+</nav>
+
 <header class="hero">
-  <p class="hero-eyebrow">A curated guide</p>
+  <p class="hero-eyebrow">A personal guide</p>
   <h1>Willow's Tour of San Francisco,<br><em>neighborhood by neighborhood</em></h1>
   <p class="hero-sub">Oak's tour framework to introduce Willow to the city's geography, history, and character</p>
   <div class="hero-rule"></div>
@@ -365,229 +148,69 @@
   </div>
 </nav>
 
-<div class="count-bar" id="count-bar"></div>
-
+<p class="count-bar" id="count-bar"></p>
 <main class="grid" id="grid" role="list"></main>
 
-<footer class="footer">
+<footer class="site-footer">
   <p><strong>Willow's Tour of San Francisco</strong> &nbsp;·&nbsp; A personal guide from Oak</p>
 </footer>
 
+<script src="data.js"></script>
 <script>
-const neighborhoods = [
-  {
-    name: "North Beach & Telegraph Hill",
-    zone: "north",
-    vibe: "either",
-    tagline: "Beat generation roots, Italian soul",
-    history: "San Francisco's Italian immigrant heart since the Gold Rush era. In the 1950s, City Lights Bookstore and Vesuvio Bar made it the nucleus of the Beat movement — Ginsberg, Kerouac, and Ferlinghetti all passed through. The neighborhood retains its village-within-a-city energy.",
-    attractions: ["City Lights Books & Beat landmarks", "Coit Tower + wild parrots on the climb up", "Vesuvio Bar (historic watering hole)", "Molinari Deli and Columbus Ave Italian joints", "Washington Square Park — bocce, tai chi, neighborhood life"],
-    pairs: "Fisherman's Wharf (walkable), Chinatown (5 min)"
-  },
-  {
-    name: "Chinatown",
-    zone: "east",
-    vibe: "daytime",
-    tagline: "Oldest Chinatown in North America, dense and alive",
-    history: "Established in 1848, this is the oldest Chinatown in North America and was the entry point for generations of Chinese immigrants. It survived the 1906 earthquake and subsequent attempts at forced relocation. Today it's one of the most densely populated urban districts in the US.",
-    attractions: ["Grant Ave — tourist spine; Waverly Place — the real one", "Dim sum on Kearny or Stockton", "Golden Gate Fortune Cookie Factory", "Ten Ren Tea for a tasting", "Chinatown Gate and surrounding alleys"],
-    pairs: "North Beach (10 min walk), Union Square"
-  },
-  {
-    name: "The Castro",
-    zone: "south",
-    vibe: "either",
-    tagline: "Heart of LGBTQ+ America, enduring and proud",
-    history: "Transformed in the late 1960s–70s as LGBTQ+ residents built one of the first openly gay neighborhoods in the world. Harvey Milk was elected from here in 1977. The AIDS crisis hit the Castro devastatingly; its legacy of activism and community care shaped modern LGBTQ+ rights movements globally.",
-    attractions: ["Harvey Milk Plaza and the giant rainbow flag", "Castro Theatre (vintage movie palace)", "Twin Peaks Tavern (first gay bar with street-view windows)", "GLBT Historical Society Museum", "18th & Castro — the social epicenter"],
-    pairs: "Noe Valley (adjacent), Mission (10 min)"
-  },
-  {
-    name: "Mission District",
-    zone: "south",
-    vibe: "either",
-    tagline: "Latino culture, murals, and the city's best food block",
-    history: "Named for Mission Dolores (1776), SF's oldest building. The Mission became a working-class Latino neighborhood through 20th-century immigration and remains culturally anchored there. The mural tradition — particularly on Balmy Alley — is world-class.",
-    attractions: ["Balmy Alley and Clarion Alley murals", "Mission Dolores (the original mission)", "Dolores Park — city social center on weekends", "24th St corridor for taquerias and panaderías", "Bi-Rite Creamery, Tartine Bakery, Dandelion Chocolate"],
-    pairs: "Castro (10 min), Bernal Heights (adjacent)"
-  },
-  {
-    name: "Haight-Ashbury",
-    zone: "central",
-    vibe: "daytime",
-    tagline: "Summer of Love ground zero, still counterculture",
-    history: "The epicenter of the 1967 Summer of Love. Janis Joplin, the Grateful Dead, and Jefferson Airplane all lived within blocks of here. The Victorian housing stock survived the 1906 earthquake, giving the neighborhood its characteristic painted-lady streetscape.",
-    attractions: ["The Grateful Dead house (710 Ashbury)", "Haight Street record stores and vintage shops", "Buena Vista Park (elevated views, quieter)", "Golden Gate Park panhandle entry", "Amoeba Music (the iconic shop)"],
-    pairs: "Cole Valley (adjacent), Golden Gate Park (walkable)"
-  },
-  {
-    name: "Golden Gate Park",
-    zone: "west",
-    vibe: "daytime",
-    tagline: "Urban wilderness bigger than Central Park",
-    history: "Developed from sand dunes starting in 1870, largely through the vision of superintendent John McLaren. At 1,017 acres it's significantly larger than Central Park and functions as the lungs of the west side. It hosted the 1894 Midwinter International Exposition.",
-    attractions: ["de Young Museum (fine art + rooftop views)", "California Academy of Sciences (aquarium + planetarium)", "Japanese Tea Garden — oldest public Japanese garden in US", "Stow Lake and boathouse", "Bison paddock in the western end"],
-    pairs: "Haight-Ashbury (east entrance), Outer Sunset (south/west)"
-  },
-  {
-    name: "Japantown & Western Addition",
-    zone: "central",
-    vibe: "daytime",
-    tagline: "One of three surviving Japantowns in the US",
-    history: "Japanese immigrants settled here in the early 1900s. The community was devastated when residents were forcibly relocated to internment camps in 1942. Post-war redevelopment further displaced the Black community that had settled the Western Addition. What remains is resilient and intentional.",
-    attractions: ["Japan Center mall and Peace Plaza pagoda", "Uji Time Dessert and Marufuku ramen", "Fillmore Street — historic jazz corridor", "Kabuki Springs & Spa", "Kinokuniya Books (Japanese language and culture)"],
-    pairs: "Alamo Square / Painted Ladies (10 min walk)"
-  },
-  {
-    name: "Alamo Square & NoPa",
-    zone: "central",
-    vibe: "either",
-    tagline: "Painted Ladies, Victorian blocks, and neighborhood restaurants",
-    history: "Alamo Square's row of Victorian houses against the skyline is one of SF's most photographed images. The surrounding NoPa (North of the Panhandle) developed in the post-earthquake rebuild of the early 1900s and has become one of the more livable and food-rich areas of the city.",
-    attractions: ["Postcard Row and Alamo Square Park", "Divisadero corridor — some of SF's best restaurants", "Nopa restaurant (the neighborhood institution)", "Ritual Coffee on Divisadero", "Biking or walking the panhandle to GG Park"],
-    pairs: "Haight-Ashbury (south), Japantown (east)"
-  },
-  {
-    name: "The Embarcadero & Ferry Building",
-    zone: "east",
-    vibe: "either",
-    tagline: "The city's waterfront spine, farmers market, and bay views",
-    history: "SF's original industrial waterfront, lined with working piers through the early 20th century. The elevated Embarcadero Freeway was torn down after the 1989 earthquake, opening up the waterfront and catalyzing what's now a premier civic promenade. The Ferry Building dates to 1898.",
-    attractions: ["Ferry Building Marketplace (Saturday farmers market is essential)", "Embarcadero promenade walk to Oracle Park", "Blue Bottle Coffee original kiosk", "Pier 7 for bay views", "Justin Herman Plaza and the waterfront sculptures"],
-    pairs: "Chinatown (15 min walk), North Beach (20 min)"
-  },
-  {
-    name: "SoMa & Yerba Buena",
-    zone: "east",
-    vibe: "evening",
-    tagline: "Museums, nightlife, and the city's industrial arts district",
-    history: "South of Market was SF's working-class and industrial district through most of the 20th century. The 1990s dot-com boom transformed it with offices and nightclubs. It remains a center of SF nightlife and houses the SFMOMA, Yerba Buena Center for the Arts, and several major museums.",
-    attractions: ["SFMOMA (world-class modern art collection)", "Yerba Buena Gardens", "Contemporary Jewish Museum", "Tech nightlife scene around Folsom/11th", "Museum of the African Diaspora (MoAD)"],
-    pairs: "Financial District (north), Mission (south)"
-  },
-  {
-    name: "Noe Valley",
-    zone: "south",
-    vibe: "daytime",
-    tagline: "Sunny, strollable, and deeply residential",
-    history: "Named after Jose de Jesus Noe, the last Mexican alcalde of San Francisco before California statehood. It was farmland into the late 1800s before being subdivided into Victorian and Edwardian blocks. A microclimate makes it one of SF's sunniest spots, reinforcing its community-oriented character.",
-    attractions: ["24th Street as a main street walk", "Omnivore Books (indie cookbook shop)", "Martha & Bros Coffee", "Church Street Corridor to Castro", "Valley views from the hilltops"],
-    pairs: "Castro (10 min), Glen Canyon Park (adjacent)"
-  },
-  {
-    name: "Bernal Heights",
-    zone: "south",
-    vibe: "daytime",
-    tagline: "The hill with the 360° view and the village feel",
-    history: "An independent town until annexed by SF in 1870. Bernal Heights avoided heavy development due to its steep terrain, which paradoxically preserved its village character. The hilltop park offers panoramic sightlines from the bay to the ocean.",
-    attractions: ["Bernal Heights Park summit (360° city view)", "Cortland Ave — neighborhood main street", "Precita Eyes Mural Center (base for Mission mural walks)", "Good Weather and other independent cafes", "Hillary Steps rock climbing at the summit"],
-    pairs: "Mission (adjacent north), Noe Valley (northwest)"
-  },
-  {
-    name: "Inner Richmond",
-    zone: "west",
-    vibe: "daytime",
-    tagline: "Fog, dim sum, Russian history, and the park's north edge",
-    history: "The Richmond developed alongside Golden Gate Park as the city pushed west through the dunes. It became home to Russian immigrants fleeing the Revolution, then waves of Chinese and Southeast Asian immigrants — layers still visible in the food scene and the Russian Orthodox Cathedral.",
-    attractions: ["Clement Street for dim sum and Asian grocers", "Green Apple Books (beloved indie bookstore)", "Holy Virgin Cathedral (Russian Orthodox)", "Lands End Trail and Sutro Baths ruins", "Coastal views from Land's End to the bridge"],
-    pairs: "Golden Gate Park (south), Presidio (north)"
-  },
-  {
-    name: "The Presidio & Crissy Field",
-    zone: "north",
-    vibe: "daytime",
-    tagline: "Military history, bay views, and one of SF's best walks",
-    history: "A military installation for 219 years under three flags — Spanish, Mexican, and American — before being transferred to the National Park Service in 1994. Crissy Field was a military airstrip restored to a tidal marsh in 2001. The transition from army base to park is one of urban America's great civic success stories.",
-    attractions: ["Golden Gate Bridge (south tower viewpoint)", "Crissy Field walk — best city-to-bridge perspective", "Baker Beach", "Presidio Main Post and Officers' Club", "Walt Disney Family Museum"],
-    pairs: "Marina (adjacent east), Richmond (adjacent south)"
-  },
-  {
-    name: "Marina & Cow Hollow",
-    zone: "north",
-    vibe: "either",
-    tagline: "Brunch culture, the bay, and Italianate architecture",
-    history: "The Marina was built on fill for the 1915 Panama-Pacific Exposition — the same landfill that liquefied in the 1989 earthquake. Marina homes are recognizable by their Italianate and Mediterranean Revival architecture. Cow Hollow behind it was literally a dairy farming area through the 1890s.",
-    attractions: ["Chestnut Street — the social corridor", "Fort Mason Center (arts, farmers market, greens)", "Wave Organ (acoustic sculpture at the breakwater)", "Palace of Fine Arts (1915 Expo survivor)", "Marina Green and bay running paths"],
-    pairs: "Presidio (west), North Beach (east)"
-  },
-  {
-    name: "Outer Sunset",
-    zone: "west",
-    vibe: "daytime",
-    tagline: "Fog, surf culture, and the city's most underrated restaurant strip",
-    history: "Developed in the early 20th century as the city pushed west through the dunes. Long considered a sleepy residential backwater, the Outer Sunset has become a destination in its own right, with a thriving independent restaurant and café scene along Irving and Judah, and a surf culture centered on Ocean Beach.",
-    attractions: ["Ocean Beach and Sutro Baths (dramatic ruins)", "Irving Street independent restaurants", "Outerlands (brunch institution)", "Java Beach Café by the water", "Foggy walks along the Great Highway"],
-    pairs: "Golden Gate Park (north), Inner Sunset (east)"
-  }
-];
-
-const zoneLabels = {
-  north: "North / Waterfront",
-  central: "Central",
-  east: "East / Downtown",
-  west: "West / Avenues",
-  south: "South / Mission"
-};
+const zoneLabels = { north:"North / Waterfront", central:"Central", east:"East / Downtown", west:"West / Avenues", south:"South / Mission" };
+const vibeLabels = { daytime:"Daytime", evening:"Evening", either:"Day or evening" };
+const vibeBadge = { daytime:"badge-day", evening:"badge-evening", either:"badge-either" };
 
 let activeZone = 'all', activeVibe = 'all';
 
+const NOTES_KEY = 'sfTourPersonalNotes';
+function loadNotes() {
+  try { return JSON.parse(localStorage.getItem(NOTES_KEY) || '{}'); } catch { return {}; }
+}
+
 function render() {
-  const filtered = neighborhoods.filter(n =>
+  const filtered = NEIGHBORHOODS.filter(n =>
     (activeZone === 'all' || n.zone === activeZone) &&
     (activeVibe === 'all' || n.vibe === activeVibe)
   );
+  document.getElementById('count-bar').textContent = `${filtered.length} neighborhood${filtered.length !== 1 ? 's' : ''}`;
 
-  document.getElementById('count-bar').textContent =
-    `${filtered.length} neighborhood${filtered.length !== 1 ? 's' : ''}`;
-
+  const notes = loadNotes();
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
 
   filtered.forEach((n, i) => {
-    const vibeLabel = { daytime: 'Daytime', evening: 'Evening', either: 'Day or evening' }[n.vibe];
-    const vibeBadge = { daytime: 'badge-day', evening: 'badge-evening', either: 'badge-either' }[n.vibe];
-
+    const personalNote = notes[n.slug] || '';
     const card = document.createElement('article');
     card.className = 'card';
     card.setAttribute('role', 'listitem');
+
+    const noteHtml = personalNote
+      ? `<div class="personal-note-wrap">
+           <div class="personal-note-label">Your note</div>
+           <div class="personal-note-text">${personalNote.substring(0,140)}${personalNote.length > 140 ? '…' : ''}</div>
+         </div>`
+      : '';
+
     card.innerHTML = `
-      <div class="card-top">
-        <div style="flex:1">
-          <div class="card-num">No. ${String(i + 1).padStart(2, '0')}</div>
-          <div class="card-name">${n.name}</div>
-          <div class="card-tagline">${n.tagline}</div>
-          <div class="card-badges">
-            <span class="badge badge-zone">${zoneLabels[n.zone]}</span>
-            <span class="badge ${vibeBadge}">${vibeLabel}</span>
-          </div>
-        </div>
-        <div class="toggle-icon" aria-hidden="true">+</div>
+      <div class="card-num">No. ${String(i+1).padStart(2,'0')}</div>
+      <div class="card-name">${n.name}</div>
+      <div class="card-tagline">${n.tagline}</div>
+      <div class="card-badges">
+        <span class="badge badge-zone">${zoneLabels[n.zone]}</span>
+        <span class="badge ${vibeBadge[n.vibe]}">${vibeLabels[n.vibe]}</span>
       </div>
-      <div class="card-body" aria-expanded="false">
-        <div class="body-section">
-          <div class="section-lbl">History &amp; character</div>
-          <p class="body-text">${n.history}</p>
-        </div>
-        <div class="body-section">
-          <div class="section-lbl">Highlights &amp; attractions</div>
-          <ul class="attr-list">${n.attractions.map(a => `<li>${a}</li>`).join('')}</ul>
-        </div>
-        <div class="body-section">
-          <div class="section-lbl">Pairs well with</div>
-          <p class="pair-text">${n.pairs}</p>
-        </div>
+      ${noteHtml}
+      <div class="card-note">${n.intro.substring(0, 180)}…</div>
+      <div class="card-footer">
+        <span class="card-pairs">Pairs with: ${n.pairs}</span>
+        <a class="card-link" href="neighborhoods/${n.slug}.html">Full guide →</a>
       </div>
     `;
-
-    card.addEventListener('click', () => {
-      card.classList.toggle('expanded');
-    });
-
     grid.appendChild(card);
   });
 }
 
-// Zone filters
 document.querySelectorAll('[data-zone]').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('[data-zone]').forEach(b => b.classList.remove('active'));
@@ -596,8 +219,6 @@ document.querySelectorAll('[data-zone]').forEach(btn => {
     render();
   });
 });
-
-// Vibe filters
 document.querySelectorAll('[data-vibe]').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('[data-vibe]').forEach(b => b.classList.remove('active'));
