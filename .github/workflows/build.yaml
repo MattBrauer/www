@@ -1,0 +1,23 @@
+name: Build site
+on:
+  push:
+    paths:
+      - 'data.js'
+      - 'generate_fixed.js'
+      - 'shared.css'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node generate_fixed.js
+        working-directory: willows-sf-tour
+      - run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add neighborhoods/
+          git commit -m "rebuild [skip ci]" || echo "nothing to commit"
+          git push
