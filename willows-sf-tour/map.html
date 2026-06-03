@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neighborhood Map — Willow's SF Tour</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+  .map-page { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .map-header { margin-bottom: 1.5rem; }
+  .map-header h1 { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; margin-bottom: 0.35rem; }
+  .map-header p { font-size: 14px; color: var(--ink-3); font-weight: 300; }
+
+  #map {
+    width: 100%;
+    height: 620px;
+    border-radius: 10px;
+    border: 1px solid var(--paper-3);
+    z-index: 1;
+  }
+
+  .map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 0.9rem 1.25rem;
+    background: var(--paper-2);
+    border: 1px solid var(--paper-3);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    font-size: 12px;
+  }
+  .leg-group { display: flex; align-items: center; gap: 6px; color: var(--ink-2); }
+  .leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .leg-note { margin-left: auto; font-size: 11px; color: var(--ink-4); font-style: italic; }
+
+  /* Leaflet popup overrides */
+  .leaflet-popup-content-wrapper {
+    border-radius: 8px !important;
+    box-shadow: 0 4px 16px rgba(26,23,20,0.14) !important;
+    font-family: var(--sans) !important;
+    padding: 0 !important;
+    overflow: hidden;
+  }
+  .leaflet-popup-content {
+    margin: 0 !important;
+    width: 210px !important;
+  }
+  .leaflet-popup-tip { background: white !important; }
+  .popup-inner { padding: 14px 16px; }
+  .popup-name { font-size: 14px; font-weight: 500; color: #1a1714; margin-bottom: 3px; line-height: 1.3; }
+  .popup-tag { font-size: 12px; color: #8a8580; font-style: italic; line-height: 1.45; margin-bottom: 10px; }
+  .popup-link {
+    display: inline-block;
+    font-size: 12px;
+    color: #c84b2f;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    border-top: 1px solid #e2ddd5;
+    padding: 8px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #faf7f2;
+    transition: background 0.15s;
+  }
+  .popup-link:hover { background: #f0ece4; }
+
+  /* Custom marker pins */
+  .nb-marker {
+    width: 28px;
+    height: 28px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(26,23,20,0.25);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .nb-marker:hover {
+    transform: rotate(-45deg) scale(1.15);
+    box-shadow: 0 4px 10px rgba(26,23,20,0.3);
+  }
+  .nb-marker.north  { background: #1D9E75; }
+  .nb-marker.central { background: #7F77DD; }
+  .nb-marker.east   { background: #378ADD; }
+  .nb-marker.west   { background: #3B6D11; }
+  .nb-marker.south  { background: #BA7517; }
+
+  @media (max-width: 600px) {
+    .map-page { padding: 1.25rem 1rem 3rem; }
+    #map { height: 480px; }
+    .leg-note { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-home">Willow's SF Tour</a>
+  <a href="index.html" style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;">← All neighborhoods</a>
+</nav>
+
+<div class="map-page">
+  <div class="map-header">
+    <h1>The city, at a glance</h1>
+    <p>16 neighborhoods across San Francisco's 7×7 miles — click any pin to open its guide</p>
+  </div>
+
+  <div id="map"></div>
+
+  <div class="map-legend">
+    <div class="leg-group"><div class="leg-dot" style="background:#1D9E75"></div> North / Waterfront</div>
+    <div class="leg-group"><div class="leg-dot" style="background:#7F77DD"></div> Central</div>
+    <div class="leg-group"><div class="leg-dot" style="background:#378ADD"></div> East / Downtown</div>
+    <div class="leg-group"><div class="leg-dot" style="background:#3B6D11"></div> West / Avenues</div>
+    <div class="leg-group"><div class="leg-dot" style="background:#BA7517"></div> South / Mission</div>
+    <span class="leg-note">Click any pin to open its neighborhood guide</span>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p><strong>Willow's Tour of San Francisco</strong> &nbsp;·&nbsp; A personal guide from Oak</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map = L.map('map', {
+  center: [37.758, -122.447],
+  zoom: 13,
+  zoomControl: true,
+  scrollWheelZoom: false
+});
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 19
+}).addTo(map);
+
+const neighborhoods = [
+  { slug: 'north-beach',     name: 'North Beach & Telegraph Hill', zone: 'north',   lat: 37.8060, lng: -122.4103, tag: 'Beat generation roots, Italian soul' },
+  { slug: 'chinatown',       name: 'Chinatown',                    zone: 'east',    lat: 37.7941, lng: -122.4078, tag: 'Oldest Chinatown in North America' },
+  { slug: 'castro',          name: 'The Castro',                   zone: 'south',   lat: 37.7609, lng: -122.4350, tag: 'Heart of LGBTQ+ America, enduring and proud' },
+  { slug: 'mission',         name: 'Mission District',             zone: 'south',   lat: 37.7599, lng: -122.4148, tag: 'Latino culture, murals, the city\'s best food' },
+  { slug: 'haight-ashbury',  name: 'Haight-Ashbury',               zone: 'central', lat: 37.7692, lng: -122.4481, tag: 'Summer of Love ground zero, still counterculture' },
+  { slug: 'golden-gate-park',name: 'Golden Gate Park',             zone: 'west',    lat: 37.7694, lng: -122.4862, tag: 'Urban wilderness bigger than Central Park' },
+  { slug: 'japantown',       name: 'Japantown & Western Addition', zone: 'central', lat: 37.7853, lng: -122.4308, tag: 'One of three surviving Japantowns in the US' },
+  { slug: 'alamo-square',    name: 'Alamo Square & NoPa',          zone: 'central', lat: 37.7763, lng: -122.4341, tag: 'Painted Ladies, Victorian blocks, NoPa restaurants' },
+  { slug: 'embarcadero',     name: 'The Embarcadero & Ferry Building', zone: 'east', lat: 37.7955, lng: -122.3937, tag: 'Waterfront spine, farmers market, bay views' },
+  { slug: 'soma',            name: 'SoMa & Yerba Buena',           zone: 'east',    lat: 37.7785, lng: -122.4056, tag: 'Museums, nightlife, industrial arts district' },
+  { slug: 'noe-valley',      name: 'Noe Valley',                   zone: 'south',   lat: 37.7502, lng: -122.4337, tag: 'Sunny, strollable, deeply residential' },
+  { slug: 'bernal-heights',  name: 'Bernal Heights',               zone: 'south',   lat: 37.7388, lng: -122.4152, tag: 'The hill with the 360° view and village feel' },
+  { slug: 'richmond',        name: 'Inner Richmond',               zone: 'west',    lat: 37.7793, lng: -122.4638, tag: 'Fog, dim sum, Russian history, Lands End' },
+  { slug: 'presidio',        name: 'The Presidio & Crissy Field',  zone: 'north',   lat: 37.7989, lng: -122.4662, tag: 'Military history, bay views, best urban walk' },
+  { slug: 'marina',          name: 'Marina & Cow Hollow',          zone: 'north',   lat: 37.8013, lng: -122.4364, tag: 'Brunch culture, the bay, Italianate architecture' },
+  { slug: 'outer-sunset',    name: 'Outer Sunset',                 zone: 'west',    lat: 37.7525, lng: -122.5019, tag: 'Fog, surf culture, underrated restaurant strip' },
+];
+
+const zoneColors = {
+  north:   '#1D9E75',
+  central: '#7F77DD',
+  east:    '#378ADD',
+  west:    '#3B6D11',
+  south:   '#BA7517',
+};
+
+neighborhoods.forEach(nb => {
+  const icon = L.divIcon({
+    className: '',
+    html: `<div class="nb-marker ${nb.zone}"></div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -30]
+  });
+
+  const marker = L.marker([nb.lat, nb.lng], { icon }).addTo(map);
+
+  const popupHtml = `
+    <div class="popup-inner">
+      <div class="popup-name">${nb.name}</div>
+      <div class="popup-tag">${nb.tag}</div>
+    </div>
+    <a class="popup-link" href="neighborhoods/${nb.slug}.html">Open neighborhood guide →</a>
+  `;
+
+  marker.bindPopup(popupHtml, { maxWidth: 210, minWidth: 210 });
+});
+</script>
+</body>
+</html>

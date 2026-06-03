@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Willow's Tour of San Francisco</title>
 <link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
   .controls {
     position: sticky;
@@ -101,6 +102,92 @@
   .personal-note-label { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: #a07830; margin-bottom: 3px; }
   .personal-note-text { font-size: 12px; color: var(--ink-2); font-style: italic; line-height: 1.55; }
 
+
+  /* ── MAP PANEL ── */
+  .map-panel {
+    border-bottom: 1px solid var(--paper-3);
+    background: var(--paper-2);
+  }
+  .map-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-2);
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .map-toggle:hover { background: var(--paper-3); }
+  .map-toggle-left { display: flex; align-items: center; gap: 10px; }
+  .map-toggle-icon { font-size: 15px; color: var(--ink-3); }
+  .map-toggle-label { font-weight: 500; }
+  .map-toggle-sub { font-size: 11px; color: var(--ink-3); margin-left: 4px; font-weight: 300; }
+  .map-toggle-chevron {
+    font-size: 13px; color: var(--ink-4);
+    transition: transform 0.25s;
+    display: inline-block;
+  }
+  .map-panel.open .map-toggle-chevron { transform: rotate(180deg); }
+  .map-body {
+    display: none;
+    border-top: 1px solid var(--paper-3);
+  }
+  .map-panel.open .map-body { display: block; }
+  #index-map {
+    width: 100%;
+    height: 380px;
+  }
+  .map-footer-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0.7rem 1.5rem;
+    border-top: 1px solid var(--paper-3);
+    background: var(--paper);
+    align-items: center;
+  }
+  .map-leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--ink-3); }
+  .map-leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .map-full-link {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+  }
+  .map-full-link:hover { color: var(--ink); }
+
+  /* Popup overrides */
+  .leaflet-popup-content-wrapper {
+    border-radius: 7px !important;
+    box-shadow: 0 4px 14px rgba(26,23,20,0.13) !important;
+    font-family: var(--sans) !important;
+    padding: 0 !important;
+    overflow: hidden;
+  }
+  .leaflet-popup-content { margin: 0 !important; width: 200px !important; }
+  .leaflet-popup-tip-container { display: block; }
+  .popup-inner { padding: 12px 14px; }
+  .popup-name { font-size: 13px; font-weight: 500; color: #1a1714; margin-bottom: 2px; line-height: 1.3; }
+  .popup-tag { font-size: 11px; color: #8a8580; font-style: italic; line-height: 1.4; margin-bottom: 8px; }
+  .popup-link {
+    display: block; font-size: 11px; color: #c84b2f; text-decoration: none;
+    border-top: 1px solid #e2ddd5; padding: 7px 14px;
+    background: #faf7f2; transition: background 0.15s;
+  }
+  .popup-link:hover { background: #f0ece4; }
+  .nb-pin {
+    width: 24px; height: 24px; border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg); border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(26,23,20,0.22); cursor: pointer;
+  }
+
   @media (max-width: 600px) {
     .controls { padding: 0.7rem 1rem; }
     .filter-sep { display: none; }
@@ -113,7 +200,7 @@
 
 <nav class="site-nav">
   <span class="nav-home">Willow's SF Tour</span>
-  <span style="font-size:11px; color: rgba(247,244,239,0.3); letter-spacing:0.06em; text-transform:uppercase;">16 neighborhoods</span>
+  <a href="map.html" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:rgba(247,244,239,0.5); text-decoration:none;">Map view</a>
 </nav>
 
 <header class="hero">
@@ -127,6 +214,29 @@
     <div class="stat"><span class="stat-n">7×7</span><span class="stat-label">Square miles</span></div>
   </div>
 </header>
+
+
+<div class="map-panel" id="map-panel">
+  <button class="map-toggle" id="map-toggle" aria-expanded="false" aria-controls="map-body">
+    <span class="map-toggle-left">
+      <span class="map-toggle-icon">⊕</span>
+      <span class="map-toggle-label">City map</span>
+      <span class="map-toggle-sub">— see all 16 neighborhoods geographically</span>
+    </span>
+    <span class="map-toggle-chevron">▾</span>
+  </button>
+  <div class="map-body" id="map-body">
+    <div id="index-map"></div>
+    <div class="map-footer-bar">
+      <span class="map-leg"><span class="map-leg-dot" style="background:#1D9E75"></span>North</span>
+      <span class="map-leg"><span class="map-leg-dot" style="background:#7F77DD"></span>Central</span>
+      <span class="map-leg"><span class="map-leg-dot" style="background:#378ADD"></span>East</span>
+      <span class="map-leg"><span class="map-leg-dot" style="background:#3B6D11"></span>West</span>
+      <span class="map-leg"><span class="map-leg-dot" style="background:#BA7517"></span>South</span>
+      <a href="map.html" class="map-full-link">Full map view →</a>
+    </div>
+  </div>
+</div>
 
 <nav class="controls" aria-label="Filter neighborhoods">
   <div class="filter-group">
@@ -230,5 +340,70 @@ document.querySelectorAll('[data-vibe]').forEach(btn => {
 
 render();
 </script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+let indexMap = null;
+
+function initMap() {
+  if (indexMap) return;
+  indexMap = L.map('index-map', {
+    center: [37.758, -122.447],
+    zoom: 12,
+    zoomControl: true,
+    scrollWheelZoom: false
+  });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd', maxZoom: 19
+  }).addTo(indexMap);
+
+  const nbData = [
+    { slug:'north-beach',      name:'North Beach & Telegraph Hill', zone:'north',   lat:37.8060, lng:-122.4103, tag:'Beat generation roots, Italian soul' },
+    { slug:'chinatown',        name:'Chinatown',                    zone:'east',    lat:37.7941, lng:-122.4078, tag:'Oldest Chinatown in North America' },
+    { slug:'castro',           name:'The Castro',                   zone:'south',   lat:37.7609, lng:-122.4350, tag:'Heart of LGBTQ+ America' },
+    { slug:'mission',          name:'Mission District',             zone:'south',   lat:37.7599, lng:-122.4148, tag:'Latino culture, murals, the city's best food' },
+    { slug:'haight-ashbury',   name:'Haight-Ashbury',               zone:'central', lat:37.7692, lng:-122.4481, tag:'Summer of Love ground zero' },
+    { slug:'golden-gate-park', name:'Golden Gate Park',             zone:'west',    lat:37.7694, lng:-122.4862, tag:'Urban wilderness bigger than Central Park' },
+    { slug:'japantown',        name:'Japantown & Western Addition', zone:'central', lat:37.7853, lng:-122.4308, tag:'One of three surviving Japantowns in the US' },
+    { slug:'alamo-square',     name:'Alamo Square & NoPa',          zone:'central', lat:37.7763, lng:-122.4341, tag:'Painted Ladies, Victorian blocks' },
+    { slug:'embarcadero',      name:'The Embarcadero & Ferry Building', zone:'east', lat:37.7955, lng:-122.3937, tag:'Waterfront spine, farmers market, bay views' },
+    { slug:'soma',             name:'SoMa & Yerba Buena',           zone:'east',    lat:37.7785, lng:-122.4056, tag:'Museums, nightlife, industrial arts' },
+    { slug:'noe-valley',       name:'Noe Valley',                   zone:'south',   lat:37.7502, lng:-122.4337, tag:'Sunny, strollable, deeply residential' },
+    { slug:'bernal-heights',   name:'Bernal Heights',               zone:'south',   lat:37.7388, lng:-122.4152, tag:'The hill with the 360° view' },
+    { slug:'richmond',         name:'Inner Richmond',               zone:'west',    lat:37.7793, lng:-122.4638, tag:'Fog, dim sum, Russian history' },
+    { slug:'presidio',         name:'The Presidio & Crissy Field',  zone:'north',   lat:37.7989, lng:-122.4662, tag:'Military history, bay views, best urban walk' },
+    { slug:'marina',           name:'Marina & Cow Hollow',          zone:'north',   lat:37.8013, lng:-122.4364, tag:'Brunch culture, the bay, Italianate architecture' },
+    { slug:'outer-sunset',     name:'Outer Sunset',                 zone:'west',    lat:37.7525, lng:-122.5019, tag:'Fog, surf culture, underrated restaurant strip' },
+  ];
+  const zoneColors = { north:'#1D9E75', central:'#7F77DD', east:'#378ADD', west:'#3B6D11', south:'#BA7517' };
+
+  nbData.forEach(nb => {
+    const icon = L.divIcon({
+      className: '',
+      html: '<div class="nb-pin" style="background:' + zoneColors[nb.zone] + '"></div>',
+      iconSize: [24, 24], iconAnchor: [12, 24], popupAnchor: [0, -26]
+    });
+    L.marker([nb.lat, nb.lng], { icon }).addTo(indexMap)
+      .bindPopup(
+        '<div class="popup-inner"><div class="popup-name">' + nb.name + '</div><div class="popup-tag">' + nb.tag + '</div></div>' +
+        '<a class="popup-link" href="neighborhoods/' + nb.slug + '.html">Open neighborhood guide →</a>',
+        { maxWidth: 200, minWidth: 200 }
+      );
+  });
+}
+
+const panel = document.getElementById('map-panel');
+const toggle = document.getElementById('map-toggle');
+toggle.addEventListener('click', () => {
+  const isOpen = panel.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', isOpen);
+  if (isOpen) {
+    initMap();
+    setTimeout(() => indexMap && indexMap.invalidateSize(), 50);
+  }
+});
+</script>
+
 </body>
 </html>
