@@ -1,143 +1,9 @@
-const fs = require('fs');
-const path = require('path');
-
-// Write module wrappers then require
-const rawData = fs.readFileSync('./data.js', 'utf8');
-
-// Extract NEIGHBORHOODS array
-const nbMatch = rawData.match(/const NEIGHBORHOODS = (\[[\s\S]*?\n\];)/);
-const mtMatch = rawData.match(/const MINI_TOURS = (\[[\s\S]*?\n\];)/);
-
-fs.writeFileSync('./data_nb.js', 'module.exports = ' + nbMatch[1]);
-fs.writeFileSync('./data_mt.js', 'module.exports = ' + mtMatch[1]);
-
-const NEIGHBORHOODS = require('./data_nb.js');
-const MINI_TOURS = require('./data_mt.js');
-
-console.log(`Loaded ${NEIGHBORHOODS.length} neighborhoods, ${MINI_TOURS.length} mini-tours`);
-
-const zoneLabels = { north:"North / Waterfront", central:"Central", east:"East / Downtown", west:"West / Avenues", south:"South / Mission" };
-const vibeLabels = { daytime:"Daytime", evening:"Evening", either:"Day or evening" };
-const vibeBadge = { daytime:"badge-day", evening:"badge-evening", either:"badge-either" };
-
-// ── FULL NEIGHBORHOOD PAGE ──────────────────────────────────────────
-function neighborhoodPage(n, all) {
-  const idx = all.findIndex(x => x.slug === n.slug);
-  const prev = all[idx - 1];
-  const next = all[idx + 1];
-  const prevLink = prev ? `<a href="${prev.slug}.html" class="nav-arrow">← ${prev.name}</a>` : `<span></span>`;
-  const nextLink = next ? `<a href="${next.slug}.html" class="nav-arrow">${next.name} →</a>` : `<span></span>`;
-
-  const itineraryRows = n.itinerary.map((s, i) => `
-    <div class="itinerary-row">
-      <div class="itin-time">${s.time}</div>
-      <div class="itin-dot"><div class="dot"></div>${i < n.itinerary.length - 1 ? '<div class="line"></div>' : ''}</div>
-      <div class="itin-content">
-        <div class="itin-stop">${s.stop}</div>
-        <div class="itin-note">${s.note}</div>
-      </div>
-    </div>`).join('');
-
-  const spotsHtml = n.spots.map(s => `
-    <div class="spot-card">
-      <div class="spot-header"><span class="spot-name">${s.name}</span><span class="spot-type">${s.type}</span></div>
-      <div class="spot-note">${s.note}</div>
-    </div>`).join('');
-
-  return fullPage(n, zoneLabels[n.zone], vibeBadge[n.vibe], vibeLabels[n.vibe], `
-  <section class="section">
-    <h2 class="section-title"><span class="section-title-num">01</span> Oak's introduction</h2>
-    <p class="intro-text">${n.intro}</p>
-  </section>
-  <section class="section">
-    <h2 class="section-title"><span class="section-title-num">02</span> History &amp; character</h2>
-    <p class="history-text">${n.history}</p>
-  </section>
-  <section class="section">
-    <h2 class="section-title"><span class="section-title-num">03</span> Proposed itinerary</h2>
-    <div>${itineraryRows}</div>
-  </section>
-  <section class="section">
-    <h2 class="section-title"><span class="section-title-num">04</span> Recommended spots</h2>
-    <div class="spots-grid">${spotsHtml}</div>
-  </section>
-  ${journalAndPhotos(5, n.slug)}
-  `, prevLink, nextLink, '../index.html', false);
-}
-
-// ── MINI-TOUR PAGE ──────────────────────────────────────────────────
-function miniTourPage(n, all) {
-  const idx = all.findIndex(x => x.slug === n.slug);
-  const prev = all[idx - 1];
-  const next = all[idx + 1];
-  const prevLink = prev ? `<a href="${prev.slug}.html" class="nav-arrow">← ${prev.name}</a>` : `<span></span>`;
-  const nextLink = next ? `<a href="${next.slug}.html" class="nav-arrow">${next.name} →</a>` : `<span></span>`;
-
-  const spotsHtml = n.spots.map(s => `
-    <div class="spot-card">
-      <div class="spot-header"><span class="spot-name">${s.name}</span><span class="spot-type">${s.type}</span></div>
-      <div class="spot-note">${s.note}</div>
-    </div>`).join('');
-
-  return fullPage(n, zoneLabels[n.zone], 'badge-mini', 'Mini-tour', `
-  <section class="section">
-    <h2 class="section-title"><span class="section-title-num">01</span> Oak's introduction</h2>
-    <p class="intro-text">${n.intro}</p>
-  </section>
-  <section class="section">
-    <h2 class="section-title"><span class="section-title-num">02</span> Highlights &amp; spots</h2>
-    <div class="spots-grid">${spotsHtml}</div>
-  </section>
-  <section class="section">
-    <h2 class="section-title"><span class="section-title-num">03</span> Pairs well with</h2>
-    <p class="history-text" style="font-style:italic;color:var(--ink-3)">${n.pairs}</p>
-  </section>
-  ${journalAndPhotos(4, n.slug)}
-  `, prevLink, nextLink, '../index.html', true);
-}
-
-function journalAndPhotos(startNum, slug) {
-  return `
-  <section class="section">
-    <h2 class="section-title"><span class="section-title-num">0${startNum}</span> Willow's notes</h2>
-    <p style="font-size:13px;color:var(--ink-3);margin-bottom:12px;font-weight:300">Your thoughts, reactions, things to remember — saved in your browser.</p>
-    <textarea class="notes-area" id="personal-notes" placeholder="Add your notes about this neighborhood…"></textarea>
-    <div class="notes-save">
-      <button class="btn btn-primary" onclick="saveNotes()">Save note</button>
-      <span class="notes-saved-msg" id="notes-saved-msg">Saved.</span>
-    </div>
-  </section>
-  <section class="section">
-    <h2 class="section-title"><span class="section-title-num">0${startNum+1}</span> Journal</h2>
-    <p style="font-size:13px;color:var(--ink-3);margin-bottom:14px;font-weight:300">Dated entries — write one after each visit.</p>
-    <div class="journal-compose">
-      <div class="journal-date-row"><span class="journal-date-label">Date</span><input type="date" class="journal-date-input" id="journal-date"></div>
-      <textarea class="journal-textarea" id="journal-text" placeholder="What was the visit like? What stood out?"></textarea>
-      <button class="btn btn-primary" onclick="addEntry()">Add entry</button>
-    </div>
-    <div class="journal-entries" id="journal-entries"></div>
-  </section>
-  <section class="section">
-    <h2 class="section-title"><span class="section-title-num">0${startNum+2}</span> Photos</h2>
-    <p style="font-size:13px;color:var(--ink-3);margin-bottom:14px;font-weight:300">Drag and drop photos from your visits.</p>
-    <div class="photo-drop-zone" id="drop-zone" onclick="document.getElementById('photo-file-input').click()">
-      <div class="drop-icon">⬆</div>
-      <p class="drop-text">Drop photos here, or click to browse</p>
-      <p class="drop-subtext">JPG, PNG, HEIC — any size</p>
-    </div>
-    <input type="file" id="photo-file-input" multiple accept="image/*">
-    <div class="photo-grid" id="photo-grid"></div>
-  </section>`;
-}
-
-function fullPage(n, zoneLabel, vibeBadgeClass, vibeLabel, bodyHtml, prevLink, nextLink, backHref, isMini) {
-  const miniPill = isMini ? '<span class="badge badge-mini">Mini-tour</span>' : '';
-  return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${n.name} — Willow's SF Tour</title>
+<title>Cole Valley — Willow's SF Tour</title>
 <link rel="stylesheet" href="../shared.css">
 <style>
   .page-wrap { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.5rem 0; }
@@ -217,33 +83,97 @@ function fullPage(n, zoneLabel, vibeBadgeClass, vibeLabel, bodyHtml, prevLink, n
 </head>
 <body>
 <nav class="site-nav">
-  <a href="${backHref}" class="nav-home">Willow's SF Tour</a>
-  <a href="${backHref}" style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;">← All neighborhoods</a>
+  <a href="../index.html" class="nav-home">Willow's SF Tour</a>
+  <a href="../index.html" style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;">← All neighborhoods</a>
 </nav>
 <div class="page-wrap">
   <div class="page-header">
     <div class="page-header-top">
       <div class="page-badges">
-        <span class="badge badge-zone">${zoneLabel}</span>
-        ${isMini ? '<span class="badge badge-mini">Mini-tour</span>' : `<span class="badge ${vibeBadgeClass}">${vibeLabel}</span>`}
+        <span class="badge badge-zone">Central</span>
+        <span class="badge badge-mini">Mini-tour</span>
       </div>
-      <a href="${backHref}" class="back-link">← Back to all</a>
+      <a href="../index.html" class="back-link">← Back to all</a>
     </div>
-    <h1 class="page-title">${n.name}</h1>
-    <p class="page-tagline">${n.tagline}</p>
+    <h1 class="page-title">Cole Valley</h1>
+    <p class="page-tagline">A tucked-away village between the Haight and the park</p>
   </div>
-  ${bodyHtml}
+  
+  <section class="section">
+    <h2 class="section-title"><span class="section-title-num">01</span> Oak's introduction</h2>
+    <p class="intro-text">Cole Valley is easy to miss — it sits in a small declivity between the Haight and Twin Peaks, with a main street (Carl Street/Cole Street) that's only a few blocks long. But what blocks they are: a bakery, a café, a bar, a diner, an ice cream shop, all within a short walk of each other, in a neighborhood that feels genuinely insulated from the city around it. The N-Judah streetcar runs through it, which gives it a pleasant urban-village transit energy. Worth a detour when you're coming out of Golden Gate Park.</p>
+  </section>
+  <section class="section">
+    <h2 class="section-title"><span class="section-title-num">02</span> Highlights &amp; spots</h2>
+    <div class="spots-grid">
+    <div class="spot-card">
+      <div class="spot-header"><span class="spot-name">Reverie Café</span><span class="spot-type">Coffee</span></div>
+      <div class="spot-note">Small, warm, good coffee. The Cole Valley café.</div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-header"><span class="spot-name">Zazie</span><span class="spot-type">Food</span></div>
+      <div class="spot-note">French bistro on Cole. Weekend brunch is a neighborhood institution. The courtyard garden.</div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-header"><span class="spot-name">Cole Valley Bakery</span><span class="spot-type">Food</span></div>
+      <div class="spot-note">Simple neighborhood bakery. Good pastries, unpretentious.</div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-header"><span class="spot-name">Kezar Stadium</span><span class="spot-type">Landmark</span></div>
+      <div class="spot-note">The old stadium at the edge of GG Park. Catch a local game if something's on.</div>
+    </div>
+    <div class="spot-card">
+      <div class="spot-header"><span class="spot-name">Parnassus Heights views</span><span class="spot-type">Viewpoint</span></div>
+      <div class="spot-note">Walk up Belgrave or Shrader above Cole Valley. The views across the city from UCSF territory.</div>
+    </div></div>
+  </section>
+  <section class="section">
+    <h2 class="section-title"><span class="section-title-num">03</span> Pairs well with</h2>
+    <p class="history-text" style="font-style:italic;color:var(--ink-3)">Haight-Ashbury (north), Golden Gate Park (west)</p>
+  </section>
+  
+  <section class="section">
+    <h2 class="section-title"><span class="section-title-num">04</span> Willow's notes</h2>
+    <p style="font-size:13px;color:var(--ink-3);margin-bottom:12px;font-weight:300">Your thoughts, reactions, things to remember — saved in your browser.</p>
+    <textarea class="notes-area" id="personal-notes" placeholder="Add your notes about this neighborhood…"></textarea>
+    <div class="notes-save">
+      <button class="btn btn-primary" onclick="saveNotes()">Save note</button>
+      <span class="notes-saved-msg" id="notes-saved-msg">Saved.</span>
+    </div>
+  </section>
+  <section class="section">
+    <h2 class="section-title"><span class="section-title-num">05</span> Journal</h2>
+    <p style="font-size:13px;color:var(--ink-3);margin-bottom:14px;font-weight:300">Dated entries — write one after each visit.</p>
+    <div class="journal-compose">
+      <div class="journal-date-row"><span class="journal-date-label">Date</span><input type="date" class="journal-date-input" id="journal-date"></div>
+      <textarea class="journal-textarea" id="journal-text" placeholder="What was the visit like? What stood out?"></textarea>
+      <button class="btn btn-primary" onclick="addEntry()">Add entry</button>
+    </div>
+    <div class="journal-entries" id="journal-entries"></div>
+  </section>
+  <section class="section">
+    <h2 class="section-title"><span class="section-title-num">06</span> Photos</h2>
+    <p style="font-size:13px;color:var(--ink-3);margin-bottom:14px;font-weight:300">Drag and drop photos from your visits.</p>
+    <div class="photo-drop-zone" id="drop-zone" onclick="document.getElementById('photo-file-input').click()">
+      <div class="drop-icon">⬆</div>
+      <p class="drop-text">Drop photos here, or click to browse</p>
+      <p class="drop-subtext">JPG, PNG, HEIC — any size</p>
+    </div>
+    <input type="file" id="photo-file-input" multiple accept="image/*">
+    <div class="photo-grid" id="photo-grid"></div>
+  </section>
+  
 </div>
 <div class="neighbor-nav">
-  ${prevLink}
-  <a href="${backHref}" class="btn">All neighborhoods</a>
-  ${nextLink}
+  <a href="outer-richmond.html" class="nav-arrow">← Outer Richmond</a>
+  <a href="../index.html" class="btn">All neighborhoods</a>
+  <a href="potrero-hill.html" class="nav-arrow">Potrero Hill →</a>
 </div>
 <footer class="site-footer">
   <p><strong>Willow's Tour of San Francisco</strong> &nbsp;·&nbsp; A personal guide from Oak</p>
 </footer>
 <script>
-const SLUG = '${n.slug}';
+const SLUG = 'cole-valley';
 const NOTES_KEY = 'sfTourNotes_' + SLUG;
 const JOURNAL_KEY = 'sfTourJournal_' + SLUG;
 function loadNotes() { const s = localStorage.getItem(NOTES_KEY); if (s) document.getElementById('personal-notes').value = s; }
@@ -286,25 +216,4 @@ loadNotes(); renderJournal();
 document.getElementById('journal-date').value = new Date().toISOString().split('T')[0];
 </script>
 </body>
-</html>`;
-}
-
-// ── GENERATE ────────────────────────────────────────────────────────
-const nbDir = path.join(__dirname, 'neighborhoods');
-const mtDir = path.join(__dirname, 'mini-tours');
-if (!fs.existsSync(nbDir)) fs.mkdirSync(nbDir);
-if (!fs.existsSync(mtDir)) fs.mkdirSync(mtDir);
-
-NEIGHBORHOODS.forEach(n => {
-  fs.writeFileSync(path.join(nbDir, n.slug + '.html'), neighborhoodPage(n, NEIGHBORHOODS));
-  console.log('  ✓ neighborhoods/' + n.slug + '.html');
-});
-
-MINI_TOURS.forEach(n => {
-  fs.writeFileSync(path.join(mtDir, n.slug + '.html'), miniTourPage(n, MINI_TOURS));
-  console.log('  ✓ mini-tours/' + n.slug + '.html');
-});
-
-console.log('\nDone. ' + NEIGHBORHOODS.length + ' neighborhood pages, ' + MINI_TOURS.length + ' mini-tour pages.');
-fs.unlinkSync('./data_nb.js');
-fs.unlinkSync('./data_mt.js');
+</html>

@@ -8,89 +8,84 @@
 <style>
   .page-wrap { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.5rem 0; }
   .page-header { margin-bottom: 2.5rem; }
-  .page-header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
-  .page-badges { display: flex; gap: 6px; flex-wrap: wrap; }
-  .back-link { font-size: 12px; color: var(--ink-3); text-decoration: none; letter-spacing: 0.04em; transition: color 0.15s; }
-  .back-link:hover { color: var(--ink); }
-  .page-title { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; line-height: 1.15; margin-bottom: 0.4rem; }
-  .page-tagline { font-size: 15px; color: var(--ink-3); font-style: italic; font-weight: 300; }
-  .section { margin-bottom: 3rem; }
-  .section-title {
-    font-family: var(--serif); font-size: 1.1rem; font-weight: 400; color: var(--ink);
-    margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--paper-3);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .section-title-num { font-size: 11px; font-family: var(--serif); font-style: italic; color: var(--ink-4); }
-  .intro-text { font-size: 15px; color: var(--ink-2); line-height: 1.75; font-weight: 300; font-style: italic; padding-left: 1.2rem; border-left: 2px solid var(--accent-2); }
-  .history-text { font-size: 14px; color: var(--ink-2); line-height: 1.7; font-weight: 300; }
-  .itinerary-row { display: grid; grid-template-columns: 80px 28px 1fr; gap: 0 12px; min-height: 60px; }
-  .itin-time { font-size: 12px; color: var(--ink-3); padding-top: 2px; text-align: right; font-weight: 300; white-space: nowrap; }
-  .itin-dot { display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-  .line { width: 1px; flex: 1; background: var(--paper-3); margin-top: 4px; min-height: 36px; }
-  .itin-content { padding-bottom: 20px; }
-  .itin-stop { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
-  .itin-note { font-size: 13px; color: var(--ink-3); line-height: 1.55; font-weight: 300; }
-  .spots-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
-  .spot-card { background: var(--paper-2); border: 1px solid var(--paper-3); border-radius: 6px; padding: 12px 14px; }
-  .spot-header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 5px; }
-  .spot-name { font-size: 14px; font-weight: 500; color: var(--ink); }
-  .spot-type { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
-  .spot-note { font-size: 13px; color: var(--ink-2); line-height: 1.5; font-weight: 300; }
-  .notes-area { width: 100%; min-height: 140px; border: 1px solid var(--paper-3); border-radius: 6px; background: var(--paper); font-family: var(--sans); font-size: 14px; color: var(--ink-2); line-height: 1.65; padding: 14px; resize: vertical; transition: border-color 0.15s; font-weight: 300; }
-  .notes-area:focus { outline: none; border-color: var(--accent-2); }
-  .notes-area::placeholder { color: var(--ink-4); font-style: italic; }
-  .notes-save { margin-top: 8px; display: flex; align-items: center; }
-  .notes-saved-msg { font-size: 12px; color: var(--accent-3); margin-left: 10px; opacity: 0; transition: opacity 0.3s; }
-  .notes-saved-msg.show { opacity: 1; }
-  .journal-compose { background: var(--paper-2); border: 1px solid var(--paper-3); border-radius: 6px; padding: 14px; margin-bottom: 1rem; }
-  .journal-date-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .journal-date-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
-  .journal-date-input { font-family: var(--sans); font-size: 13px; border: 1px solid var(--paper-3); background: var(--paper); color: var(--ink); padding: 4px 8px; border-radius: 4px; }
-  .journal-date-input:focus { outline: none; border-color: var(--accent-2); }
-  .journal-textarea { width: 100%; min-height: 100px; border: 1px solid var(--paper-3); border-radius: 4px; background: var(--paper); font-family: var(--sans); font-size: 14px; color: var(--ink-2); line-height: 1.65; padding: 10px 12px; resize: vertical; font-weight: 300; margin-bottom: 8px; }
-  .journal-textarea:focus { outline: none; border-color: var(--accent-2); }
-  .journal-textarea::placeholder { color: var(--ink-4); font-style: italic; }
-  .journal-entries { display: flex; flex-direction: column; gap: 12px; }
-  .journal-entry { background: var(--paper); border: 1px solid var(--paper-3); border-radius: 6px; padding: 14px 16px; }
-  .entry-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
-  .entry-date { font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.04em; }
-  .entry-delete { font-size: 11px; color: var(--ink-4); background: none; border: none; cursor: pointer; padding: 0; transition: color 0.15s; }
-  .entry-delete:hover { color: var(--accent); }
-  .entry-text { font-size: 14px; color: var(--ink-2); line-height: 1.65; white-space: pre-wrap; font-weight: 300; }
-  .no-entries { font-size: 14px; color: var(--ink-4); font-style: italic; }
-  .photo-drop-zone { border: 2px dashed var(--paper-4); border-radius: 8px; padding: 2.5rem 1.5rem; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--paper-2); margin-bottom: 1rem; }
-  .photo-drop-zone:hover, .photo-drop-zone.drag-over { border-color: var(--accent-2); background: var(--accent-2-light); }
-  .drop-icon { font-size: 28px; margin-bottom: 0.5rem; }
-  .drop-text { font-size: 14px; color: var(--ink-3); margin-bottom: 4px; }
-  .drop-subtext { font-size: 12px; color: var(--ink-4); }
-  #photo-file-input { display: none; }
-  .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
-  .photo-thumb { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 5px; background: var(--paper-2); }
-  .photo-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .photo-thumb .photo-remove { position: absolute; top: 5px; right: 5px; width: 22px; height: 22px; border-radius: 50%; background: rgba(26,23,20,0.7); color: white; border: none; cursor: pointer; font-size: 14px; line-height: 1; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s; }
-  .photo-thumb:hover .photo-remove { opacity: 1; }
-  .photo-caption-input { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(26,23,20,0.55); border: none; color: white; font-family: var(--sans); font-size: 11px; padding: 5px 8px; }
-  .photo-caption-input::placeholder { color: rgba(255,255,255,0.5); }
-  .photo-caption-input:focus { outline: none; background: rgba(26,23,20,0.75); }
-  .neighbor-nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem; border-top: 1px solid var(--paper-3); margin-top: 1rem; max-width: 780px; margin-left: auto; margin-right: auto; }
-  .nav-arrow { font-size: 13px; color: var(--ink-3); text-decoration: none; transition: color 0.15s; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .nav-arrow:hover { color: var(--ink); }
-  @media (max-width: 600px) {
-    .page-wrap { padding: 1.5rem 1rem 0; }
-    .itinerary-row { grid-template-columns: 66px 24px 1fr; }
-    .spots-grid { grid-template-columns: 1fr; }
-    .photo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .page-header-top { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-bottom:0.75rem; }
+  .page-badges { display:flex; gap:6px; flex-wrap:wrap; }
+  .back-link { font-size:12px; color:var(--ink-3); text-decoration:none; transition:color 0.15s; }
+  .back-link:hover { color:var(--ink); }
+  .page-title { font-family:var(--serif); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:400; line-height:1.15; margin-bottom:0.4rem; }
+  .page-tagline { font-size:15px; color:var(--ink-3); font-style:italic; font-weight:300; }
+  .section { margin-bottom:3rem; }
+  .section-title { font-family:var(--serif); font-size:1.1rem; font-weight:400; color:var(--ink); margin-bottom:1rem; padding-bottom:0.6rem; border-bottom:1px solid var(--paper-3); display:flex; align-items:center; gap:8px; }
+  .section-title-num { font-size:11px; font-family:var(--serif); font-style:italic; color:var(--ink-4); }
+  .intro-text { font-size:15px; color:var(--ink-2); line-height:1.75; font-weight:300; font-style:italic; padding-left:1.2rem; border-left:2px solid var(--accent-2); }
+  .history-text { font-size:14px; color:var(--ink-2); line-height:1.7; font-weight:300; }
+  .itinerary-row { display:grid; grid-template-columns:80px 28px 1fr; gap:0 12px; min-height:60px; }
+  .itin-time { font-size:12px; color:var(--ink-3); padding-top:2px; text-align:right; font-weight:300; white-space:nowrap; }
+  .itin-dot { display:flex; flex-direction:column; align-items:center; padding-top:4px; }
+  .dot { width:8px; height:8px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+  .line { width:1px; flex:1; background:var(--paper-3); margin-top:4px; min-height:36px; }
+  .itin-content { padding-bottom:20px; }
+  .itin-stop { font-size:14px; font-weight:500; color:var(--ink); margin-bottom:3px; }
+  .itin-note { font-size:13px; color:var(--ink-3); line-height:1.55; font-weight:300; }
+  .spots-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; }
+  .spot-card { background:var(--paper-2); border:1px solid var(--paper-3); border-radius:6px; padding:12px 14px; }
+  .spot-header { display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:5px; }
+  .spot-name { font-size:14px; font-weight:500; color:var(--ink); }
+  .spot-type { font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-3); }
+  .spot-note { font-size:13px; color:var(--ink-2); line-height:1.5; font-weight:300; }
+  .badge-mini { background:#f0e8f5; color:#5a2d7a; border:1px solid #d4b8e8; }
+  .notes-area { width:100%; min-height:140px; border:1px solid var(--paper-3); border-radius:6px; background:var(--paper); font-family:var(--sans); font-size:14px; color:var(--ink-2); line-height:1.65; padding:14px; resize:vertical; font-weight:300; }
+  .notes-area:focus { outline:none; border-color:var(--accent-2); }
+  .notes-area::placeholder { color:var(--ink-4); font-style:italic; }
+  .notes-save { margin-top:8px; display:flex; align-items:center; }
+  .notes-saved-msg { font-size:12px; color:var(--accent-3); margin-left:10px; opacity:0; transition:opacity 0.3s; }
+  .notes-saved-msg.show { opacity:1; }
+  .journal-compose { background:var(--paper-2); border:1px solid var(--paper-3); border-radius:6px; padding:14px; margin-bottom:1rem; }
+  .journal-date-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .journal-date-label { font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-3); }
+  .journal-date-input { font-family:var(--sans); font-size:13px; border:1px solid var(--paper-3); background:var(--paper); color:var(--ink); padding:4px 8px; border-radius:4px; }
+  .journal-date-input:focus { outline:none; border-color:var(--accent-2); }
+  .journal-textarea { width:100%; min-height:100px; border:1px solid var(--paper-3); border-radius:4px; background:var(--paper); font-family:var(--sans); font-size:14px; color:var(--ink-2); line-height:1.65; padding:10px 12px; resize:vertical; font-weight:300; margin-bottom:8px; }
+  .journal-textarea:focus { outline:none; border-color:var(--accent-2); }
+  .journal-textarea::placeholder { color:var(--ink-4); font-style:italic; }
+  .journal-entries { display:flex; flex-direction:column; gap:12px; }
+  .journal-entry { background:var(--paper); border:1px solid var(--paper-3); border-radius:6px; padding:14px 16px; }
+  .entry-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px; }
+  .entry-date { font-size:12px; font-weight:500; color:var(--accent); letter-spacing:0.04em; }
+  .entry-delete { font-size:11px; color:var(--ink-4); background:none; border:none; cursor:pointer; padding:0; }
+  .entry-delete:hover { color:var(--accent); }
+  .entry-text { font-size:14px; color:var(--ink-2); line-height:1.65; white-space:pre-wrap; font-weight:300; }
+  .no-entries { font-size:14px; color:var(--ink-4); font-style:italic; }
+  .photo-drop-zone { border:2px dashed var(--paper-4); border-radius:8px; padding:2.5rem 1.5rem; text-align:center; cursor:pointer; transition:all 0.2s; background:var(--paper-2); margin-bottom:1rem; }
+  .photo-drop-zone:hover,.photo-drop-zone.drag-over { border-color:var(--accent-2); background:var(--accent-2-light); }
+  .drop-icon { font-size:28px; margin-bottom:0.5rem; }
+  .drop-text { font-size:14px; color:var(--ink-3); margin-bottom:4px; }
+  .drop-subtext { font-size:12px; color:var(--ink-4); }
+  #photo-file-input { display:none; }
+  .photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:8px; }
+  .photo-thumb { position:relative; aspect-ratio:4/3; overflow:hidden; border-radius:5px; background:var(--paper-2); }
+  .photo-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .photo-thumb .photo-remove { position:absolute; top:5px; right:5px; width:22px; height:22px; border-radius:50%; background:rgba(26,23,20,0.7); color:white; border:none; cursor:pointer; font-size:14px; line-height:1; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.15s; }
+  .photo-thumb:hover .photo-remove { opacity:1; }
+  .photo-caption-input { position:absolute; bottom:0; left:0; right:0; background:rgba(26,23,20,0.55); border:none; color:white; font-family:var(--sans); font-size:11px; padding:5px 8px; }
+  .photo-caption-input::placeholder { color:rgba(255,255,255,0.5); }
+  .photo-caption-input:focus { outline:none; background:rgba(26,23,20,0.75); }
+  .neighbor-nav { display:flex; justify-content:space-between; align-items:center; padding:1.5rem; border-top:1px solid var(--paper-3); margin-top:1rem; max-width:780px; margin-left:auto; margin-right:auto; }
+  .nav-arrow { font-size:13px; color:var(--ink-3); text-decoration:none; transition:color 0.15s; max-width:220px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .nav-arrow:hover { color:var(--ink); }
+  @media (max-width:600px) {
+    .page-wrap { padding:1.5rem 1rem 0; }
+    .itinerary-row { grid-template-columns:66px 24px 1fr; }
+    .spots-grid { grid-template-columns:1fr; }
+    .photo-grid { grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); }
   }
 </style>
 </head>
 <body>
-
 <nav class="site-nav">
   <a href="../index.html" class="nav-home">Willow's SF Tour</a>
-  <a href="../index.html" style="font-size:11px; letter-spacing:0.06em; text-transform:uppercase;">← All neighborhoods</a>
+  <a href="../index.html" style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;">← All neighborhoods</a>
 </nav>
-
 <div class="page-wrap">
   <div class="page-header">
     <div class="page-header-top">
@@ -103,17 +98,15 @@
     <h1 class="page-title">Haight-Ashbury</h1>
     <p class="page-tagline">Summer of Love ground zero, still counterculture</p>
   </div>
-
+  
   <section class="section">
     <h2 class="section-title"><span class="section-title-num">01</span> Oak's introduction</h2>
     <p class="intro-text"></p>
   </section>
-
   <section class="section">
     <h2 class="section-title"><span class="section-title-num">02</span> History &amp; character</h2>
     <p class="history-text">The epicenter of the 1967 Summer of Love. Janis Joplin, the Grateful Dead, and Jefferson Airplane all lived within blocks of here. The Victorian housing stock survived the 1906 earthquake, giving the neighborhood its characteristic painted-lady streetscape.</p>
   </section>
-
   <section class="section">
     <h2 class="section-title"><span class="section-title-num">03</span> Proposed itinerary</h2>
     <div>
@@ -166,81 +159,57 @@
       </div>
     </div></div>
   </section>
-
   <section class="section">
     <h2 class="section-title"><span class="section-title-num">04</span> Recommended spots</h2>
     <div class="spots-grid">
     <div class="spot-card">
-      <div class="spot-header">
-        <span class="spot-name">Amoeba Music</span>
-        <span class="spot-type">Shopping</span>
-      </div>
+      <div class="spot-header"><span class="spot-name">Amoeba Music</span><span class="spot-type">Shopping</span></div>
       <div class="spot-note">One of the last great record stores in America. Give yourself time.</div>
     </div>
     <div class="spot-card">
-      <div class="spot-header">
-        <span class="spot-name">Cha Cha Cha</span>
-        <span class="spot-type">Food</span>
-      </div>
+      <div class="spot-header"><span class="spot-name">Cha Cha Cha</span><span class="spot-type">Food</span></div>
       <div class="spot-note">Cuban-inspired tapas. The sangria pitcher is the move.</div>
     </div>
     <div class="spot-card">
-      <div class="spot-header">
-        <span class="spot-name">Wasteland</span>
-        <span class="spot-type">Shopping</span>
-      </div>
+      <div class="spot-header"><span class="spot-name">Wasteland</span><span class="spot-type">Shopping</span></div>
       <div class="spot-note">The best vintage clothing store in the Haight. Prices are real, selection is exceptional.</div>
     </div>
     <div class="spot-card">
-      <div class="spot-header">
-        <span class="spot-name">Bound Together Anarchist Book Collective</span>
-        <span class="spot-type">Books</span>
-      </div>
+      <div class="spot-header"><span class="spot-name">Bound Together Anarchist Book Collective</span><span class="spot-type">Books</span></div>
       <div class="spot-note">Worker-run since 1976. Exactly what it sounds like. Worth a browse.</div>
     </div>
     <div class="spot-card">
-      <div class="spot-header">
-        <span class="spot-name">Flywheel Coffee</span>
-        <span class="spot-type">Coffee</span>
-      </div>
+      <div class="spot-header"><span class="spot-name">Flywheel Coffee</span><span class="spot-type">Coffee</span></div>
       <div class="spot-note">Neighborhood institution. Good espresso, no pretension.</div>
     </div>
     <div class="spot-card">
-      <div class="spot-header">
-        <span class="spot-name">Buena Vista Park</span>
-        <span class="spot-type">Park</span>
-      </div>
+      <div class="spot-header"><span class="spot-name">Buena Vista Park</span><span class="spot-type">Park</span></div>
       <div class="spot-note">Quieter than GG Park, better views. The eucalyptus grove at the top is eerie in fog.</div>
     </div></div>
   </section>
-
+  
   <section class="section">
     <h2 class="section-title"><span class="section-title-num">05</span> Willow's notes</h2>
-    <p style="font-size:13px; color:var(--ink-3); margin-bottom:12px; font-weight:300;">Your thoughts, reactions, things to remember — saved locally in your browser.</p>
-    <textarea class="notes-area" id="personal-notes" placeholder="Add your notes about this neighborhood — what you noticed, what surprised you, what you want to come back for…"></textarea>
+    <p style="font-size:13px;color:var(--ink-3);margin-bottom:12px;font-weight:300">Your thoughts, reactions, things to remember — saved in your browser.</p>
+    <textarea class="notes-area" id="personal-notes" placeholder="Add your notes about this neighborhood…"></textarea>
     <div class="notes-save">
       <button class="btn btn-primary" onclick="saveNotes()">Save note</button>
       <span class="notes-saved-msg" id="notes-saved-msg">Saved.</span>
     </div>
   </section>
-
   <section class="section">
     <h2 class="section-title"><span class="section-title-num">06</span> Journal</h2>
-    <p style="font-size:13px; color:var(--ink-3); margin-bottom:14px; font-weight:300;">Dated entries — write one after each visit. Saved locally in your browser.</p>
+    <p style="font-size:13px;color:var(--ink-3);margin-bottom:14px;font-weight:300">Dated entries — write one after each visit.</p>
     <div class="journal-compose">
-      <div class="journal-date-row">
-        <span class="journal-date-label">Date</span>
-        <input type="date" class="journal-date-input" id="journal-date">
-      </div>
-      <textarea class="journal-textarea" id="journal-text" placeholder="What was the visit like? What stood out? What do you want to remember?"></textarea>
+      <div class="journal-date-row"><span class="journal-date-label">Date</span><input type="date" class="journal-date-input" id="journal-date"></div>
+      <textarea class="journal-textarea" id="journal-text" placeholder="What was the visit like? What stood out?"></textarea>
       <button class="btn btn-primary" onclick="addEntry()">Add entry</button>
     </div>
     <div class="journal-entries" id="journal-entries"></div>
   </section>
-
   <section class="section">
     <h2 class="section-title"><span class="section-title-num">07</span> Photos</h2>
-    <p style="font-size:13px; color:var(--ink-3); margin-bottom:14px; font-weight:300;">Drag and drop photos from your visits. Stored in your browser session.</p>
+    <p style="font-size:13px;color:var(--ink-3);margin-bottom:14px;font-weight:300">Drag and drop photos from your visits.</p>
     <div class="photo-drop-zone" id="drop-zone" onclick="document.getElementById('photo-file-input').click()">
       <div class="drop-icon">⬆</div>
       <p class="drop-text">Drop photos here, or click to browse</p>
@@ -249,94 +218,57 @@
     <input type="file" id="photo-file-input" multiple accept="image/*">
     <div class="photo-grid" id="photo-grid"></div>
   </section>
+  
 </div>
-
 <div class="neighbor-nav">
-  <a href="mission.html" class="nav-arrow nav-prev">← Mission District</a>
-  <a href="../index.html" class="btn" style="font-size:12px;">All neighborhoods</a>
-  <a href="golden-gate-park.html" class="nav-arrow nav-next">Golden Gate Park →</a>
+  <a href="mission.html" class="nav-arrow">← Mission District</a>
+  <a href="../index.html" class="btn">All neighborhoods</a>
+  <a href="golden-gate-park.html" class="nav-arrow">Golden Gate Park →</a>
 </div>
-
 <footer class="site-footer">
   <p><strong>Willow's Tour of San Francisco</strong> &nbsp;·&nbsp; A personal guide from Oak</p>
 </footer>
-
 <script>
 const SLUG = 'haight-ashbury';
 const NOTES_KEY = 'sfTourNotes_' + SLUG;
 const JOURNAL_KEY = 'sfTourJournal_' + SLUG;
-
-function loadNotes() {
-  const saved = localStorage.getItem(NOTES_KEY);
-  if (saved) document.getElementById('personal-notes').value = saved;
-}
+function loadNotes() { const s = localStorage.getItem(NOTES_KEY); if (s) document.getElementById('personal-notes').value = s; }
 function saveNotes() {
   const val = document.getElementById('personal-notes').value;
   localStorage.setItem(NOTES_KEY, val);
   const msg = document.getElementById('notes-saved-msg');
-  msg.classList.add('show');
-  setTimeout(() => msg.classList.remove('show'), 2000);
-  try {
-    const shared = JSON.parse(localStorage.getItem('sfTourPersonalNotes') || '{}');
-    shared[SLUG] = val;
-    localStorage.setItem('sfTourPersonalNotes', JSON.stringify(shared));
-  } catch(e) {}
+  msg.classList.add('show'); setTimeout(() => msg.classList.remove('show'), 2000);
+  try { const sh = JSON.parse(localStorage.getItem('sfTourPersonalNotes') || '{}'); sh[SLUG] = val; localStorage.setItem('sfTourPersonalNotes', JSON.stringify(sh)); } catch(e) {}
 }
-
-function loadJournal() {
-  try { return JSON.parse(localStorage.getItem(JOURNAL_KEY) || '[]'); } catch { return []; }
-}
-function saveJournal(entries) { localStorage.setItem(JOURNAL_KEY, JSON.stringify(entries)); }
+function loadJournal() { try { return JSON.parse(localStorage.getItem(JOURNAL_KEY) || '[]'); } catch { return []; } }
+function saveJournal(e) { localStorage.setItem(JOURNAL_KEY, JSON.stringify(e)); }
 function renderJournal() {
-  const entries = loadJournal();
-  const container = document.getElementById('journal-entries');
-  if (!entries.length) { container.innerHTML = '<p class="no-entries">No entries yet — write your first after visiting.</p>'; return; }
-  container.innerHTML = entries.map((e, i) => '<div class="journal-entry"><div class="entry-header"><span class="entry-date">' + e.date + '</span><button class="entry-delete" onclick="deleteEntry(' + i + ')">Delete</button></div><div class="entry-text">' + e.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div></div>').join('');
+  const entries = loadJournal(); const c = document.getElementById('journal-entries');
+  if (!entries.length) { c.innerHTML = '<p class="no-entries">No entries yet — write your first after visiting.</p>'; return; }
+  c.innerHTML = entries.map((e,i) => '<div class="journal-entry"><div class="entry-header"><span class="entry-date">' + e.date + '</span><button class="entry-delete" onclick="deleteEntry(' + i + ')">Delete</button></div><div class="entry-text">' + e.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div></div>').join('');
 }
 function addEntry() {
   const date = document.getElementById('journal-date').value;
-  const text = document.getElementById('journal-text').value.trim();
-  if (!text) return;
-  const label = date ? new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' }) : new Date().toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-  const entries = loadJournal();
-  entries.unshift({ date: label, text });
-  saveJournal(entries);
-  document.getElementById('journal-text').value = '';
-  document.getElementById('journal-date').value = new Date().toISOString().split('T')[0];
+  const text = document.getElementById('journal-text').value.trim(); if (!text) return;
+  const label = date ? new Date(date + 'T12:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}) : new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const entries = loadJournal(); entries.unshift({date:label,text}); saveJournal(entries);
+  document.getElementById('journal-text').value = ''; document.getElementById('journal-date').value = new Date().toISOString().split('T')[0];
   renderJournal();
 }
-function deleteEntry(idx) {
-  if (!confirm('Delete this journal entry?')) return;
-  const entries = loadJournal();
-  entries.splice(idx, 1);
-  saveJournal(entries);
-  renderJournal();
-}
-
+function deleteEntry(idx) { if (!confirm('Delete this entry?')) return; const e = loadJournal(); e.splice(idx,1); saveJournal(e); renderJournal(); }
 const photos = [];
 function renderPhotos() {
-  const grid = document.getElementById('photo-grid');
-  grid.innerHTML = photos.map((p, i) => '<div class="photo-thumb"><img src="' + p.src + '" alt="Photo ' + (i+1) + '"><button class="photo-remove" onclick="removePhoto(' + i + ')" title="Remove">×</button><input class="photo-caption-input" type="text" placeholder="Add a caption…" value="' + (p.caption||'').replace(/"/g,'&quot;') + '" onchange="updateCaption(' + i + ', this.value)" onclick="event.stopPropagation()"></div>').join('');
+  document.getElementById('photo-grid').innerHTML = photos.map((p,i) => '<div class="photo-thumb"><img src="' + p.src + '" alt="Photo ' + (i+1) + '"><button class="photo-remove" onclick="removePhoto(' + i + ')">×</button><input class="photo-caption-input" type="text" placeholder="Add a caption…" value="' + (p.caption||'').replace(/"/g,'&quot;') + '" onchange="updateCaption(' + i + ',this.value)" onclick="event.stopPropagation()"></div>').join('');
 }
-function addPhotos(files) {
-  Array.from(files).forEach(file => {
-    if (!file.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = e => { photos.push({ src: e.target.result, caption: '' }); renderPhotos(); };
-    reader.readAsDataURL(file);
-  });
-}
-function removePhoto(idx) { photos.splice(idx, 1); renderPhotos(); }
-function updateCaption(idx, val) { photos[idx].caption = val; }
-
-const dropZone = document.getElementById('drop-zone');
-dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); addPhotos(e.dataTransfer.files); });
+function addPhotos(files) { Array.from(files).forEach(f => { if (!f.type.startsWith('image/')) return; const r = new FileReader(); r.onload = e => { photos.push({src:e.target.result,caption:''}); renderPhotos(); }; r.readAsDataURL(f); }); }
+function removePhoto(i) { photos.splice(i,1); renderPhotos(); }
+function updateCaption(i,v) { photos[i].caption = v; }
+const dz = document.getElementById('drop-zone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); addPhotos(e.dataTransfer.files); });
 document.getElementById('photo-file-input').addEventListener('change', e => addPhotos(e.target.files));
-
-loadNotes();
-renderJournal();
+loadNotes(); renderJournal();
 document.getElementById('journal-date').value = new Date().toISOString().split('T')[0];
 </script>
 </body>

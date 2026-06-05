@@ -115,7 +115,7 @@
     <div class="leg-group"><div class="leg-dot" style="background:#378ADD"></div> East / Downtown</div>
     <div class="leg-group"><div class="leg-dot" style="background:#3B6D11"></div> West / Avenues</div>
     <div class="leg-group"><div class="leg-dot" style="background:#BA7517"></div> South / Mission</div>
-    <span class="leg-note">Click any pin to open its neighborhood guide</span>
+    <div class="leg-group"><div class="leg-dot" style="width:9px;height:9px;background:#888;border-radius:50%;opacity:0.7"></div> Mini-tours (small circles)</div><span class="leg-note">Click any pin to open its guide</span>
   </div>
 </div>
 
@@ -165,7 +165,19 @@ const zoneColors = {
   south:   '#BA7517',
 };
 
-neighborhoods.forEach(nb => {
+
+  const miniTours = [
+    { slug:'west-portal',     name:'West Portal',        zone:'central', lat:37.7395, lng:-122.4664, tag:'A proper small-town main street inside the city' },
+    { slug:'pacific-heights', name:'Pacific Heights',    zone:'north',   lat:37.7925, lng:-122.4382, tag:'Old money, grand Victorians, best bay views' },
+    { slug:'lands-end',       name:'Lands End',          zone:'west',    lat:37.7786, lng:-122.5118, tag:'Coastal ruins, shipwrecks, most dramatic trail' },
+    { slug:'outer-richmond',  name:'Outer Richmond',     zone:'west',    lat:37.7756, lng:-122.4936, tag:'The fog belt's quiet end, where the city runs out of land' },
+    { slug:'cole-valley',     name:'Cole Valley',        zone:'central', lat:37.7659, lng:-122.4491, tag:'Tucked-away village between the Haight and the park' },
+    { slug:'potrero-hill',    name:'Potrero Hill',       zone:'south',   lat:37.7587, lng:-122.4007, tag:'Sunny, industrial-edge, surprising views' },
+    { slug:'glen-park',       name:'Glen Park',          zone:'south',   lat:37.7337, lng:-122.4338, tag:'A canyon, a creek, and an unlikely village' },
+    { slug:'dogpatch',        name:'Dogpatch',           zone:'east',    lat:37.7590, lng:-122.3895, tag:'Industrial waterfront reinvented as design district' },
+  ];
+
+  neighborhoods.forEach(nb => {
   const icon = L.divIcon({
     className: '',
     html: `<div class="nb-marker ${nb.zone}"></div>`,
@@ -186,6 +198,21 @@ neighborhoods.forEach(nb => {
 
   marker.bindPopup(popupHtml, { maxWidth: 210, minWidth: 210 });
 });
+
+
+  miniTours.forEach(nb => {
+    const icon = L.divIcon({
+      className: '',
+      html: '<div style="width:14px;height:14px;border-radius:50%;background:' + zoneColors[nb.zone] + ';border:2px solid white;box-shadow:0 1px 4px rgba(26,23,20,0.3);opacity:0.85"></div>',
+      iconSize: [14, 14], iconAnchor: [7, 7], popupAnchor: [0, -10]
+    });
+    L.marker([nb.lat, nb.lng], { icon }).addTo(map)
+      .bindPopup(
+        '<div class="popup-inner"><div class="popup-name" style="font-size:12px">' + nb.name + '</div><div class="popup-tag" style="margin-bottom:6px">' + nb.tag + '</div><span style="font-size:10px;background:#f0e8f5;color:#5a2d7a;padding:2px 6px;border-radius:3px;border:1px solid #d4b8e8">Mini-tour</span></div>' +
+        '<a class="popup-link" href="mini-tours/' + nb.slug + '.html">Open mini-tour guide →</a>',
+        { maxWidth: 200, minWidth: 200 }
+      );
+  });
 </script>
 </body>
 </html>

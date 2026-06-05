@@ -466,3 +466,128 @@ const NEIGHBORHOODS = [
     pairs: "Golden Gate Park (north), Inner Sunset (east)"
   }
 ];
+
+const MINI_TOURS = [
+  {
+    slug: "west-portal",
+    name: "West Portal",
+    zone: "central",
+    tagline: "A proper small-town main street inside the city",
+    intro: "West Portal is one of those SF neighborhoods that feels like it got misdelivered from somewhere in Marin. It sits at the mouth of the Twin Peaks Tunnel — the portal is literally a feature of the streetscape — and the commercial strip along West Portal Avenue has the unhurried character of a small town main street: an independent bookshop, an old-school candy store, a diner that's been there since your grandparents' era. It's not dramatic. It won't change your life. But on a foggy afternoon with nowhere to be, it's exactly right.",
+    spots: [
+      { name: "browser books", type: "Books", note: "Small independent bookshop. Carefully curated, genuinely good staff picks." },
+      { name: "Squat & Gobble", type: "Food", note: "Crepes and brunch. Reliable, cheerful, exactly what the neighborhood needs." },
+      { name: "Chocolate Heaven", type: "Shopping", note: "Old-fashioned candy and chocolate shop. Has been here forever." },
+      { name: "West Portal Muni Station", type: "Landmark", note: "The tunnel portal itself is worth a look — trains disappear into the hill. Oddly satisfying." },
+      { name: "Out the Door", type: "Food", note: "Good casual Vietnamese from the Slanted Door family. Reliable lunch spot." }
+    ],
+    pairs: "Forest Hill (adjacent), Twin Peaks (nearby)"
+  },
+  {
+    slug: "pacific-heights",
+    name: "Pacific Heights",
+    zone: "north",
+    tagline: "Old money, grand Victorians, and the best views in the city",
+    intro: "Pacific Heights is where San Francisco's old money lives, and the neighborhood shows it in the architecture: Victorians and Edwardians of a scale and ornamentation you don't see elsewhere in the city, on streets that are wide and quiet and maintained with a certain seriousness of purpose. Broadway and Vallejo in the upper blocks have some of the most beautiful residential architecture in California. The views from Broadway looking north across the bay toward Marin are extraordinary. It's not a neighborhood you go to eat or drink — you go to walk and look.",
+    spots: [
+      { name: "Broadway between Buchanan and Baker", type: "Walk", note: "The finest residential streetscape in SF. Walk slowly and look up." },
+      { name: "Alta Plaza Park", type: "Park", note: "Terraced park with bay views. The steps on the north side are a favorite film location." },
+      { name: "Fillmore Street (upper)", type: "Walk", note: "From Jackson to Broadway — boutiques, cafes, the better end of Fillmore." },
+      { name: "Spreckels Mansion", type: "Landmark", note: "2080 Washington St. The largest private residence in SF. Danielle Steel lives here. Look, don't knock." },
+      { name: "Peet's on Fillmore", type: "Coffee", note: "Good perch to sit and watch Pacific Heights go about its day." }
+    ],
+    pairs: "Japantown (south), Marina (north)"
+  },
+  {
+    slug: "lands-end",
+    name: "Lands End",
+    zone: "west",
+    tagline: "Coastal ruins, shipwrecks, and the city's most dramatic trail",
+    intro: "Lands End is technically part of the Golden Gate National Recreation Area rather than a neighborhood, but it deserves its own entry because it's one of the most distinctive places in SF and many people who visit the city never find it. The trail runs along the rocky coast from the Sutro Baths ruins to the Eagle's Point overlook, with views of the Golden Gate, the Marin Headlands, and at low tide, the exposed ribs of ships that wrecked here in the 19th century. The labyrinth on the cliff is a community art installation. The whole thing feels more like Big Sur than San Francisco.",
+    spots: [
+      { name: "Sutro Baths ruins", type: "Landmark", note: "Start here. The ruins of a 1894 public bathhouse that held six swimming pools. Free, always open." },
+      { name: "Lands End Trail", type: "Outdoors", note: "The main trail west from the baths to Eagle's Point. About 1.5 miles. Bring a jacket." },
+      { name: "Eagle's Point overlook", type: "Viewpoint", note: "The best view of the Golden Gate from the south shore. The bridge frame between headlands." },
+      { name: "Shipwreck viewpoints", type: "Landmark", note: "At low tide look for the metal ribs of the Ohioan and Frank Buck, wrecked in the early 1900s." },
+      { name: "Cliff House", type: "Landmark", note: "The building above Sutro Baths has changed hands and concepts recently — check what's operating when you visit." },
+      { name: "Louis' Restaurant", type: "Food", note: "Old-school diner above Ocean Beach. The view is worth more than the food, but the food is fine." }
+    ],
+    pairs: "Inner Richmond (east), Outer Sunset (south)"
+  },
+  {
+    slug: "outer-richmond",
+    name: "Outer Richmond",
+    zone: "west",
+    tagline: "The fog belt's quiet end, where the city runs out of land",
+    intro: "The Outer Richmond is where San Francisco stops pretending to be urban and admits it's just a fog-wrapped peninsula pointing into the Pacific. Balboa Street is the main commercial artery here — more modest than Clement, less curated than the Inner Richmond, and better for it. The neighborhood has a significant Russian and Eastern European community (look for the delis and the orthodox churches) alongside a newer layer of Southeast Asian restaurants. At the western end, the Great Highway and Ocean Beach are five minutes away. This is end-of-the-earth SF, in the best sense.",
+    spots: [
+      { name: "Balboa Street corridor", type: "Walk", note: "From 30th to 40th Ave. The real neighborhood commercial strip — quieter and less polished than Clement." },
+      { name: "Cinderella Bakery & Café", type: "Food", note: "Russian bakery on Balboa. The piroshki and the black bread. Has been here since 1953." },
+      { name: "Burma Superstar", type: "Food", note: "The original location on Clement St, edge of Outer Richmond. Long waits, worth it. The tea leaf salad." },
+      { name: "Coastal Trail to Baker Beach", type: "Outdoors", note: "Walk south from Lands End through the Seacliff neighborhood to Baker Beach. About 2 miles of coastal trail." },
+      { name: "Park Chow", type: "Food", note: "Neighborhood restaurant near GG Park. Good burgers, reliable, comfortable." },
+      { name: "37th Avenue & Balboa", type: "Landmark", note: "Stand here on a foggy afternoon and look west toward the ocean. This is what the edge of the city feels like." }
+    ],
+    pairs: "Inner Richmond (east), Lands End (northwest)"
+  },
+  {
+    slug: "cole-valley",
+    name: "Cole Valley",
+    zone: "central",
+    tagline: "A tucked-away village between the Haight and the park",
+    intro: "Cole Valley is easy to miss — it sits in a small declivity between the Haight and Twin Peaks, with a main street (Carl Street/Cole Street) that's only a few blocks long. But what blocks they are: a bakery, a café, a bar, a diner, an ice cream shop, all within a short walk of each other, in a neighborhood that feels genuinely insulated from the city around it. The N-Judah streetcar runs through it, which gives it a pleasant urban-village transit energy. Worth a detour when you're coming out of Golden Gate Park.",
+    spots: [
+      { name: "Reverie Café", type: "Coffee", note: "Small, warm, good coffee. The Cole Valley café." },
+      { name: "Zazie", type: "Food", note: "French bistro on Cole. Weekend brunch is a neighborhood institution. The courtyard garden." },
+      { name: "Cole Valley Bakery", type: "Food", note: "Simple neighborhood bakery. Good pastries, unpretentious." },
+      { name: "Kezar Stadium", type: "Landmark", note: "The old stadium at the edge of GG Park. Catch a local game if something's on." },
+      { name: "Parnassus Heights views", type: "Viewpoint", note: "Walk up Belgrave or Shrader above Cole Valley. The views across the city from UCSF territory." }
+    ],
+    pairs: "Haight-Ashbury (north), Golden Gate Park (west)"
+  },
+  {
+    slug: "potrero-hill",
+    name: "Potrero Hill",
+    zone: "south",
+    tagline: "Sunny, industrial-edge, with views that surprise you",
+    intro: "Potrero Hill sits between the Mission and the freeway, overlooking the old industrial waterfront of Dogpatch and the bay. It has a microclimate almost as sunny as Noe Valley, a residential character that's been slowly gentrifying for twenty years, and views from the top that take in the downtown skyline, the bay, and the East Bay hills in one sweep. The design and maker culture that moved into the surrounding industrial spaces has given the hill an interesting creative energy without fully displacing its older neighborhood character. 18th Street is the commercial strip worth walking.",
+    spots: [
+      { name: "18th Street corridor", type: "Walk", note: "The neighborhood main street. Cafes, a hardware store, restaurants. Walk from Connecticut to Missouri." },
+      { name: "Anchor Brewing (historic)", type: "Landmark", note: "The original home of Anchor Steam, America's first craft brewery. The building is still there even if the brewery has changed." },
+      { name: "Dogpatch neighborhood (below)", type: "Walk", note: "Walk downhill from Potrero into Dogpatch — the old industrial waterfront reinvented as design studios, restaurants, and breweries." },
+      { name: "Connecticut Street views", type: "Viewpoint", note: "From the top of Potrero Hill looking north: the downtown skyline, the bay bridge, the water. Undervisited viewpoint." },
+      { name: "Plow", type: "Food", note: "Excellent farm-to-table breakfast and lunch. One of SF's better brunch spots without the SoMa crowds." }
+    ],
+    pairs: "Mission (west), Dogpatch (east)"
+  },
+  {
+    slug: "glen-park",
+    name: "Glen Park",
+    zone: "south",
+    tagline: "A canyon, a creek, and an unlikely village at the city's geographic center",
+    intro: "Glen Park is one of SF's best-kept secrets — a neighborhood built around an actual canyon, with a creek running through it and a BART station that makes it accessible without a car. The village feel of Diamond Street is genuine: a small-town cluster of businesses that serves a neighborhood rather than tourists. Glen Canyon Park behind it is one of the wilder urban spaces in SF — you can walk for an hour on the creek trail and feel entirely out of the city. It's the neighborhood I'd take someone to if I wanted them to understand how strange and varied SF's geography actually is.",
+    spots: [
+      { name: "Glen Canyon Park", type: "Outdoors", note: "Enter from Elk Street or Bosworth. Follow the creek trail north. One of the city's wildest urban green spaces." },
+      { name: "Diamond Street village", type: "Walk", note: "The two-block commercial strip. Glen Park Station Café, the library branch, a hardware store." },
+      { name: "Glen Park BART", type: "Transit", note: "One of the deeper BART stations — watch the city disappear as you descend. Good access point from the East Bay." },
+      { name: "Gialina", type: "Food", note: "Excellent Neapolitan pizza on Diamond. One of SF's best pizza spots, consistently." },
+      { name: "Willows hidden stairs", type: "Walk", note: "The network of public stairways connecting Glen Park to Noe Valley. A walker's secret." }
+    ],
+    pairs: "Noe Valley (north), Bernal Heights (east)"
+  },
+  {
+    slug: "dogpatch",
+    name: "Dogpatch",
+    zone: "east",
+    tagline: "Industrial waterfront reinvented as SF's design and food district",
+    intro: "Dogpatch was a working-class industrial neighborhood through most of the 20th century — shipyards, ironworks, warehouses. The last decade has transformed it into one of SF's most interesting food and design destinations, with the old industrial fabric mostly intact but repurposed. The result is a neighborhood that feels genuinely post-industrial rather than nostalgically themed: the bones are real. Minnesota Street Project is one of the best art gallery spaces in the city. The waterfront trail along the bay gives you a view of the city from an angle most visitors never see.",
+    spots: [
+      { name: "Minnesota Street Project", type: "Arts", note: "Multi-gallery art space in a converted warehouse. Free, excellent programming, worth a dedicated visit." },
+      { name: "Dogpatch Saloon", type: "Bar", note: "Old neighborhood bar that survived the transformation. Unpretentious, cash-friendly, the real thing." },
+      { name: "Piccino", type: "Food", note: "Italian café and restaurant. Good coffee, excellent pizza, lovely courtyard." },
+      { name: "Third Street corridor", type: "Walk", note: "The main street — a mix of design studios, restaurants, and remnant industrial businesses." },
+      { name: "Crane Cove Park", type: "Outdoors", note: "New waterfront park with bay views and the preserved cranes from the old shipyard. The city skyline from the water's edge." }
+    ],
+    pairs: "Potrero Hill (west), Mission Bay (north)"
+  }
+];
