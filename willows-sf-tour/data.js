@@ -442,7 +442,7 @@ const NEIGHBORHOODS = [
     vibe: "daytime",
     tagline: "Fog, surf culture, and the city's most underrated restaurant strip",
     history: "Developed in the early 20th century as the city pushed west through the dunes. Long considered a sleepy residential backwater, the Outer Sunset has become a destination in its own right, with a thriving independent restaurant and café scene along Irving and Judah, and a surf culture centered on Ocean Beach.",
-    intro: "",
+    intro: "Unless they're going to the beach, Most San Franciscans think of the Outer Sunset the way they think about Danville. But it has some of the same charms as any beachside town, along with some standout restaurants, bars and shops. This would be fun to do after an overnight at my house, especially in the early Fall when we get our warm season. Also: shorebirds.",
     /*
         intro: "The Outer Sunset is the SF neighborhood that most surprises people who think they know the city. It's the end of the continent — literally, the last blocks before the Pacific — and it has a quality of light and a pace that feels nothing like downtown. The fog rolls in most afternoons and the wind off the ocean is real. But the restaurant strip along Irving Street has quietly become one of the best in the city, and on a sunny morning (they happen, usually before noon), Ocean Beach is extraordinary. Bring a jacket regardless.",
     */
@@ -456,6 +456,7 @@ const NEIGHBORHOODS = [
     ],
     spots: [
       { name: "Outerlands", type: "Food", note: "The Sunset's culinary anchor. Seasonal, wood-fired, excellent. Weekend waits are long." },
+      { name: "White Cap", type: "Bar", note: "Very nice craft cocktail bar at the ocean-end of Taraval."},
       { name: "Andytown Coffee", type: "Coffee", note: "Neighborhood roaster. The Snowy Plover (sparkling water, Turbinado syrup, espresso) is their signature." },
       { name: "Ocean Beach", type: "Beach", note: "Cold, windy, dramatic, and beautiful. Bring a jacket. The surf is serious." },
       { name: "Sutro Baths", type: "Landmark", note: "Ruins of a 1894 public bathhouse. Free, open always, remarkable." },
