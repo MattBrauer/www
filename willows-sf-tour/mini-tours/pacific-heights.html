@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pacific Heights — Willow's SF Tour</title>
 <link rel="stylesheet" href="../shared.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
+<script src="../db.js"></script>
 <style>
   .page-wrap { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.5rem 0; }
   .page-header { margin-bottom: 2.5rem; }
@@ -172,48 +175,20 @@
 <footer class="site-footer">
   <p><strong>Willow's Tour of San Francisco</strong> &nbsp;·&nbsp; A personal guide from Oak</p>
 </footer>
+<!-- Auth overlay -->
+<div id="auth-overlay" style="display:none;position:fixed;inset:0;background:rgba(26,23,20,0.7);z-index:1000;align-items:center;justify-content:center">
+  <div style="background:var(--paper);border-radius:10px;padding:2rem;max-width:340px;width:90%;text-align:center">
+    <p style="font-family:var(--serif);font-size:1.2rem;margin-bottom:0.4rem">Willow's SF Tour</p>
+    <p style="font-size:13px;color:var(--ink-3);margin-bottom:1.2rem;font-weight:300">Enter the password to access your notes and photos</p>
+    <input id="auth-input" type="password" placeholder="Password"
+      style="width:100%;padding:10px 12px;border:1px solid var(--paper-3);border-radius:6px;font-family:var(--sans);font-size:14px;margin-bottom:8px;box-sizing:border-box">
+    <p id="auth-error" style="display:none;color:var(--accent);font-size:12px;margin-bottom:8px">Incorrect password — try again.</p>
+    <button id="auth-submit" class="btn btn-primary" style="width:100%;justify-content:center">Unlock</button>
+  </div>
+</div>
 <script>
-const SLUG = 'pacific-heights';
-const NOTES_KEY = 'sfTourNotes_' + SLUG;
-const JOURNAL_KEY = 'sfTourJournal_' + SLUG;
-function loadNotes() { const s = localStorage.getItem(NOTES_KEY); if (s) document.getElementById('personal-notes').value = s; }
-function saveNotes() {
-  const val = document.getElementById('personal-notes').value;
-  localStorage.setItem(NOTES_KEY, val);
-  const msg = document.getElementById('notes-saved-msg');
-  msg.classList.add('show'); setTimeout(() => msg.classList.remove('show'), 2000);
-  try { const sh = JSON.parse(localStorage.getItem('sfTourPersonalNotes') || '{}'); sh[SLUG] = val; localStorage.setItem('sfTourPersonalNotes', JSON.stringify(sh)); } catch(e) {}
-}
-function loadJournal() { try { return JSON.parse(localStorage.getItem(JOURNAL_KEY) || '[]'); } catch { return []; } }
-function saveJournal(e) { localStorage.setItem(JOURNAL_KEY, JSON.stringify(e)); }
-function renderJournal() {
-  const entries = loadJournal(); const c = document.getElementById('journal-entries');
-  if (!entries.length) { c.innerHTML = '<p class="no-entries">No entries yet — write your first after visiting.</p>'; return; }
-  c.innerHTML = entries.map((e,i) => '<div class="journal-entry"><div class="entry-header"><span class="entry-date">' + e.date + '</span><button class="entry-delete" onclick="deleteEntry(' + i + ')">Delete</button></div><div class="entry-text">' + e.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div></div>').join('');
-}
-function addEntry() {
-  const date = document.getElementById('journal-date').value;
-  const text = document.getElementById('journal-text').value.trim(); if (!text) return;
-  const label = date ? new Date(date + 'T12:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}) : new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  const entries = loadJournal(); entries.unshift({date:label,text}); saveJournal(entries);
-  document.getElementById('journal-text').value = ''; document.getElementById('journal-date').value = new Date().toISOString().split('T')[0];
-  renderJournal();
-}
-function deleteEntry(idx) { if (!confirm('Delete this entry?')) return; const e = loadJournal(); e.splice(idx,1); saveJournal(e); renderJournal(); }
-const photos = [];
-function renderPhotos() {
-  document.getElementById('photo-grid').innerHTML = photos.map((p,i) => '<div class="photo-thumb"><img src="' + p.src + '" alt="Photo ' + (i+1) + '"><button class="photo-remove" onclick="removePhoto(' + i + ')">×</button><input class="photo-caption-input" type="text" placeholder="Add a caption…" value="' + (p.caption||'').replace(/"/g,'&quot;') + '" onchange="updateCaption(' + i + ',this.value)" onclick="event.stopPropagation()"></div>').join('');
-}
-function addPhotos(files) { Array.from(files).forEach(f => { if (!f.type.startsWith('image/')) return; const r = new FileReader(); r.onload = e => { photos.push({src:e.target.result,caption:''}); renderPhotos(); }; r.readAsDataURL(f); }); }
-function removePhoto(i) { photos.splice(i,1); renderPhotos(); }
-function updateCaption(i,v) { photos[i].caption = v; }
-const dz = document.getElementById('drop-zone');
-dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
-dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
-dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); addPhotos(e.dataTransfer.files); });
-document.getElementById('photo-file-input').addEventListener('change', e => addPhotos(e.target.files));
-loadNotes(); renderJournal();
-document.getElementById('journal-date').value = new Date().toISOString().split('T')[0];
+const PAGE_SLUG = 'pacific-heights';
 </script>
+<script src="../page-scripts.js"></script>
 </body>
 </html>
