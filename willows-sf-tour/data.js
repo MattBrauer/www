@@ -310,6 +310,7 @@ const NEIGHBORHOODS = [
       { time: "3:30 pm", stop: "Walk down to Dolores Park", note: "20 minutes south. End the afternoon in the sun." }
     ],
     spots: [
+      { name: "La Ciccia", type: "Food", note: "Authentic Sardinian cuisine, recognized by the Academy of Italian Cuisine."},
       { name: "Omnivore Books", type: "Books", note: "Cookbook-only indie bookstore. New, used, and rare. A singular experience." },
       { name: "Martha & Bros Coffee", type: "Coffee", note: "Neighborhood institution. Good espresso, outdoor seating on 24th." },
       { name: "Contigo", type: "Food", note: "Spanish tapas. The pintxos bar at the counter is excellent." },
